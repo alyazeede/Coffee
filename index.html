@@ -3,1875 +3,1983 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قهوتي - اكتشف نكهة قهوتك المثالية</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+    <title>قهوتي - تصميم وتحضير القهوة المختصة</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --light-beige: #f5f0e8;
-            --medium-beige: #e8ddcb;
-            --dark-beige: #d6c7aa;
-            --light-brown: #c3a995;
-            --medium-brown: #9e7f61;
-            --dark-brown: #6e5544;
-            --deep-brown: #4a3828;
-            --accent-color: #b87e45;
-            --accent-color-hover: #c68c53;
+            --primary-color: #7D5A44;
+            --secondary-color: #A67B5B;
+            --accent-color: #D4A76A;
+            --light-color: #F3E9DC;
+            --dark-color: #3E2D22;
+            --background-color: #FDF7F0;
+            --text-color: #442917;
+            --border-color: #D9C7B8;
         }
         
         * {
             box-sizing: border-box;
-            transition: all 0.3s ease;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
         }
         
         body {
             font-family: 'Tajawal', sans-serif;
-            background-color: var(--light-beige);
-            color: var(--deep-brown);
+            background-color: var(--background-color);
+            color: var(--text-color);
             line-height: 1.6;
         }
         
-        h1, h2, h3, h4 {
+        h1, h2, h3 {
             font-family: 'Aref Ruqaa', serif;
-            margin-bottom: 0.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
         }
         
-        .section-title {
-            font-size: 2.2rem;
-            color: var(--deep-brown);
-            text-align: center;
-            margin-bottom: 1.5rem;
+        h1 {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+        }
+        
+        h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
             position: relative;
-            padding-bottom: 10px;
+            padding-bottom: 0.5rem;
         }
         
-        .section-title::after {
+        h2::after {
             content: "";
             position: absolute;
             bottom: 0;
-            right: 50%;
-            transform: translateX(50%);
-            width: 60px;
+            right: 0;
+            width: 100px;
             height: 3px;
-            background: var(--accent-color);
+            background-color: var(--accent-color);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
         }
         
         .container {
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1rem;
         }
         
         .btn {
-            padding: 0.75rem 1.5rem;
-            background-color: var(--accent-color);
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary-color);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
             cursor: pointer;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
         }
         
         .btn:hover {
-            background-color: var(--accent-color-hover);
+            background-color: var(--dark-color);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease;
+        }
+        
+        .btn:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-secondary {
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .hero {
+            height: 100vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero-content {
+            z-index: 1;
+            max-width: 800px;
+            padding: 2rem;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .section {
+            padding: 5rem 0;
+            position: relative;
+        }
+        
+        .section-alt {
+            background-color: rgba(213, 184, 158, 0.15);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title::after {
+            right: 50%;
+            transform: translateX(50%);
         }
         
         .card {
-            background: white;
-            border-radius: 12px;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-body {
             padding: 1.5rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            margin-bottom: 1.5rem;
-            border: 1px solid var(--medium-beige);
         }
         
-        /* Animated Coffee Steam */
-        .coffee-cup {
-            position: relative;
-            display: inline-block;
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
         }
         
-        .coffee-steam {
-            position: absolute;
-            top: -15px;
-            right: 50%;
-            transform: translateX(50%);
-            width: 8px;
-            height: 10px;
-            background: rgba(255,255,255,0.7);
-            border-radius: 50%;
-            filter: blur(5px);
-            animation: steam 2s infinite;
+        .progress-bar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            padding: 1rem 0;
         }
         
-        .coffee-steam:nth-child(2) {
-            right: 40%;
-            animation-delay: 0.3s;
-        }
-        
-        .coffee-steam:nth-child(3) {
-            right: 60%;
-            animation-delay: 0.6s;
-        }
-        
-        @keyframes steam {
-            0% {
-                opacity: 0.8;
-                transform: translateY(0) translateX(0) scale(1);
-            }
-            50% {
-                opacity: 0.5;
-                transform: translateY(-10px) translateX(5px) scale(1.2);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-20px) translateX(10px) scale(1.5);
-            }
-        }
-        
-        /* Coffee beans animation */
-        .coffee-bean {
-            display: inline-block;
-            animation: rotateBeans 10s infinite linear;
-            transform-origin: center;
-            width: 24px;
-            height: 24px;
-        }
-        
-        @keyframes rotateBeans {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Progress timeline */
-        .timeline {
+        .progress-steps {
             display: flex;
             justify-content: space-between;
-            margin: 2rem 0;
+            max-width: 800px;
+            margin: 0 auto;
             position: relative;
-            padding: 0 2rem;
         }
         
-        .timeline::before {
+        .progress-steps::before {
             content: "";
             position: absolute;
-            top: 22px;
-            right: 0;
-            left: 0;
+            top: 13px;
+            right: 10%;
+            width: 80%;
             height: 4px;
-            background: var(--medium-beige);
-            z-index: 1;
+            background-color: var(--border-color);
+            z-index: -1;
         }
         
-        .timeline-step {
+        .step {
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
-            z-index: 2;
-            width: 20%;
-            text-align: center;
+            z-index: 1;
         }
         
-        .timeline-icon {
-            width: 50px;
-            height: 50px;
+        .step-number {
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
-            background: var(--light-beige);
+            background-color: var(--light-color);
+            color: var(--primary-color);
             display: flex;
-            align-items: center;
             justify-content: center;
-            border: 4px solid var(--medium-beige);
-            margin-bottom: 0.5rem;
-            color: var(--medium-brown);
-            transition: all 0.5s ease;
-        }
-        
-        .timeline-text {
-            font-size: 0.85rem;
-            color: var(--medium-brown);
-            max-width: 90px;
-            margin: 0 auto;
-        }
-        
-        .timeline-step.active .timeline-icon {
-            background: var(--accent-color);
-            border-color: var(--accent-color);
-            color: white;
-            transform: scale(1.2);
-            box-shadow: 0 0 15px rgba(184, 126, 69, 0.5);
-        }
-        
-        .timeline-step.active .timeline-text {
-            color: var(--deep-brown);
-            font-weight: bold;
-        }
-        
-        .timeline-step.completed .timeline-icon {
-            background: var(--accent-color);
-            border-color: var(--accent-color);
-            color: white;
-        }
-        
-        /* Flavor of the day */
-        .flavor-of-day {
-            background: linear-gradient(135deg, var(--dark-beige), var(--medium-brown));
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            position: relative;
-            overflow: hidden;
-            color: white;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-        }
-        
-        .flavor-of-day::before {
-            content: "";
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            width: 80px;
-            height: 80px;
-            background: var(--accent-color);
-            border-radius: 50%;
-            opacity: 0.4;
-        }
-        
-        .flavor-of-day h3 {
-            font-family: 'Aref Ruqaa', serif;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            position: relative;
-        }
-        
-        .flavor-tag {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-            font-size: 0.85rem;
-        }
-        
-        /* Seasonal Calendar */
-        .seasonal-calendar {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-        
-        .month-highlight {
-            display: inline-block;
-            background: var(--light-beige);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            margin: 0.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .month-highlight.active {
-            background: var(--accent-color);
-            color: white;
-            transform: scale(1.05);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        
-        .month-highlight:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        
-        /* Bean selection */
-        .bean-type {
-            position: relative;
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            cursor: pointer;
-            border: 2px solid transparent;
-            background: white;
-            display: flex;
             align-items: center;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
             transition: all 0.3s ease;
         }
         
-        .bean-type:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        .step.active .step-number {
+            background-color: var(--primary-color);
+            color: white;
+            transform: scale(1.2);
         }
         
-        .bean-type.selected {
-            border-color: var(--accent-color);
-            background: rgba(184, 126, 69, 0.05);
+        .step-label {
+            font-size: 0.875rem;
+            color: var(--dark-color);
+            text-align: center;
         }
         
-        .bean-icon {
-            margin-left: 1rem;
-            font-size: 1.5rem;
-            color: var(--accent-color);
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.5rem;
         }
         
-        /* Roast level selection */
-        .roast-levels {
+        .country-card {
+            border: 2px solid transparent;
+            cursor: pointer;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+        
+        .country-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .country-card.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(125, 90, 68, 0.05);
+        }
+        
+        .country-flag {
+            width: 60px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 0.75rem;
+        }
+        
+        .country-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .roast-options {
             display: flex;
             justify-content: space-between;
-            margin: 1.5rem 0;
-            position: relative;
-            padding: 0 1rem;
+            gap: 1rem;
+            margin: 2rem 0;
         }
         
-        .roast-level {
-            width: 60px;
-            text-align: center;
+        .roast-option {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid transparent;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            background-color: white;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .roast-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .roast-option.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(125, 90, 68, 0.05);
         }
         
         .roast-circle {
-            height: 40px;
-            width: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            margin: 0 auto 0.5rem;
-            transition: all 0.3s;
+            margin-bottom: 0.75rem;
+        }
+        
+        .roast-light {
+            background-color: #E1C4A0;
+        }
+        
+        .roast-medium {
+            background-color: #A67B5B;
+        }
+        
+        .roast-dark {
+            background-color: #4A2C2A;
+        }
+        
+        .bean-types {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .bean-type {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
             border: 2px solid transparent;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
         
-        .roast-circle-light {
-            background: #d2b48c;
+        .bean-type:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
         }
         
-        .roast-circle-medium {
-            background: #a0522d;
+        .bean-type.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(125, 90, 68, 0.05);
         }
         
-        .roast-circle-dark {
-            background: #3b2314;
+        .bean-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 1rem;
         }
         
-        .roast-level.selected .roast-circle {
+        .bean-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .bean-desc {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .characteristics {
+            margin: 3rem 0;
+        }
+        
+        .characteristic {
+            margin-bottom: 2rem;
+        }
+        
+        .characteristic-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .characteristic-name {
+            font-weight: 600;
+        }
+        
+        .range-container {
+            position: relative;
+            height: 30px;
+        }
+        
+        .range-slider {
+            width: 100%;
+            -webkit-appearance: none;
+            height: 6px;
+            border-radius: 3px;
+            background: #ddd;
+            outline: none;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .range-slider::-webkit-slider-thumb:hover {
+            background: var(--secondary-color);
             transform: scale(1.2);
-            border-color: var(--accent-color);
-            box-shadow: 0 0 15px rgba(184, 126, 69, 0.5);
         }
         
-        /* Radar chart for flavor profile */
+        .preparation-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .preparation-method {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            border: 2px solid transparent;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+        
+        .preparation-method:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .preparation-method.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(125, 90, 68, 0.05);
+        }
+        
+        .preparation-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .preparation-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .preparation-desc {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .ratio-calculator {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+        }
+        
+        .calculator-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.25rem;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .ratio-result {
+            background-color: var(--light-color);
+            padding: 1rem;
+            border-radius: 0.25rem;
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        
         .radar-chart-container {
             width: 100%;
             max-width: 400px;
             margin: 0 auto;
-            position: relative;
         }
         
-        .radar-chart {
-            width: 100%;
-            height: auto;
+        .flavor-profile {
+            margin: 3rem 0;
         }
         
-        /* Brew method selection */
-        .brew-methods {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-        
-        .brew-method {
-            background: white;
-            border-radius: 10px;
-            padding: 1rem;
-            width: calc(50% - 0.5rem);
-            cursor: pointer;
-            border: 2px solid transparent;
+        .share-section {
+            margin: 3rem 0;
             text-align: center;
-            transition: all 0.3s;
         }
         
-        .brew-method:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .brew-method.selected {
-            border-color: var(--accent-color);
-            background: rgba(184, 126, 69, 0.05);
-        }
-        
-        .brew-icon {
-            font-size: 2rem;
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Ratio calculator */
-        .ratio-calculator {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-        
-        .calc-input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--medium-beige);
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            font-size: 1rem;
-            color: var(--deep-brown);
-        }
-        
-        .calc-select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--medium-beige);
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            font-size: 1rem;
-            color: var(--deep-brown);
-            background: white;
-        }
-        
-        /* Share section */
-        .share-preview {
-            background: #f9f9f9;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border: 1px dashed var(--medium-beige);
-        }
-        
-        .social-share {
+        .share-buttons {
             display: flex;
+            justify-content: center;
             gap: 1rem;
-            margin-top: 1rem;
+            margin: 2rem 0;
         }
         
-        .social-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+        .share-button {
             display: flex;
             align-items: center;
-            justify-content: center;
-            background: var(--light-beige);
-            color: var(--deep-brown);
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.25rem;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .share-whatsapp {
+            background-color: #25D366;
+        }
+        
+        .share-whatsapp:hover {
+            background-color: #128C7E;
+        }
+        
+        .share-instagram {
+            background-color: #C13584;
+        }
+        
+        .share-instagram:hover {
+            background-color: #8a3ab9;
+        }
+        
+        .coffee-divider {
+            display: flex;
+            align-items: center;
+            margin: 2rem 0;
+        }
+        
+        .coffee-divider::before, .coffee-divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: var(--border-color);
+        }
+        
+        .coffee-divider-icon {
             font-size: 1.5rem;
-            transition: all 0.3s;
+            color: var(--primary-color);
+            margin: 0 1rem;
+        }
+        
+        .footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Aref Ruqaa', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .footer-text {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+        
+        .footer-contact {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .footer-social {
+            margin: 1.5rem 0;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-copy {
+            margin-top: 2rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            
+            .progress-steps {
+                overflow-x: auto;
+                padding: 0 1rem;
+            }
+            
+            .step-label {
+                font-size: 0.75rem;
+            }
+            
+            .roast-options {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            
+            .preparation-method {
+                min-width: 100%;
+            }
+            
+            .bean-type {
+                min-width: 100%;
+            }
+        }
+        
+        /* Arabesque patterns and decorations */
+        .arabesque-pattern {
+            position: absolute;
+            width: 100%;
+            height: 80px;
+            background-image: url('https://cdn.jsdelivr.net/gh/Allaev/arabesque-patterns@main/src/img/pattern1.svg');
+            background-repeat: repeat-x;
+            background-size: contain;
+            opacity: 0.1;
+        }
+        
+        .pattern-top {
+            top: 0;
+        }
+        
+        .pattern-bottom {
+            bottom: 0;
+            transform: rotate(180deg);
+        }
+        
+        .decorative-title {
+            position: relative;
+            display: inline-block;
+            padding: 0 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .decorative-title::before, .decorative-title::after {
+            content: "☕";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-color);
+            font-size: 1.5rem;
+        }
+        
+        .decorative-title::before {
+            right: 0;
+        }
+        
+        .decorative-title::after {
+            left: 0;
+        }
+        
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: none;
+            animation: slideIn 0.3s ease forwards;
+        }
+        
+        @keyframes slideIn {
+            0% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOut {
+            0% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+        
+        .tooltip {
+            position: relative;
+            display: inline-block;
             cursor: pointer;
         }
         
-        .social-btn:hover {
-            transform: translateY(-3px) scale(1.1);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .whatsapp-btn {
-            background: #25D366;
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark-color);
             color: white;
-        }
-        
-        .instagram-btn {
-            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-            color: white;
-        }
-        
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .timeline {
-                overflow-x: auto;
-                padding-bottom: 1rem;
-                justify-content: flex-start;
-            }
-            
-            .timeline-step {
-                min-width: 100px;
-            }
-            
-            .brew-method {
-                width: 100%;
-            }
-            
-            .roast-level {
-                width: 40px;
-            }
-        }
-        
-        /* Animations for elements */
-        .fade-in {
-            animation: fadeIn 0.8s ease forwards;
+            text-align: center;
+            border-radius: 6px;
+            padding: 0.5rem;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
             opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--dark-color) transparent transparent transparent;
         }
         
-        .scale-in {
-            animation: scaleIn 0.5s ease forwards;
-            transform: scale(0.9);
-            opacity: 0;
-        }
-        
-        @keyframes scaleIn {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 </head>
 <body>
-    <div class="container mx-auto py-8 px-4">
-        <!-- Header -->
-        <header class="text-center mb-8 fade-in" style="animation-delay: 0.1s;">
-            <div class="coffee-cup inline-block">
-                <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/2615.svg" alt="قهوة" width="60" height="60">
-                <div class="coffee-steam"></div>
-                <div class="coffee-steam"></div>
-                <div class="coffee-steam"></div>
-            </div>
-            <h1 class="text-4xl font-bold mt-4 text-center" style="font-family: 'Aref Ruqaa', serif; color: var(--deep-brown);">قهوتي</h1>
-            <p class="text-xl mt-2 text-center" style="color: var(--medium-brown); font-family: 'Cairo', sans-serif;">اكتشف نكهة قهوتك المثالية</p>
-        </header>
-        
-        <!-- Flavor of the day -->
-        <section class="flavor-of-day scale-in" style="animation-delay: 0.3s;">
-            <h3>نكهة اليوم <i class="fas fa-star pulse" style="color: #FFD700;"></i></h3>
-            <div class="flex items-start">
-                <div class="flex-1">
-                    <p class="mb-3 text-lg"><span id="flavor-name">إثيوبية مشرقة</span></p>
-                    <p class="mb-3">قهوة فاتحة التحميص من إثيوبيا، تتميز بنكهات الحمضيات والتوت ونفحات زهرية.</p>
-                    <div>
-                        <span class="flavor-tag">حموضة عالية</span>
-                        <span class="flavor-tag">نكهات فاكهية</span>
-                        <span class="flavor-tag">تحميص فاتح</span>
-                    </div>
-                    <button class="btn mt-4" id="apply-flavor">
-                        <i class="fas fa-check ml-2"></i> تطبيق هذه النكهة
-                    </button>
-                </div>
-                <div class="mr-4 hidden md:block">
-                    <i class="fas fa-coffee text-5xl"></i>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Progress Timeline -->
-        <div class="timeline fade-in" style="animation-delay: 0.5s;">
-            <div class="timeline-step active" data-step="beans">
-                <div class="timeline-icon">
-                    <i class="fas fa-coffee"></i>
-                </div>
-                <div class="timeline-text">اختيار الحبوب</div>
-            </div>
-            <div class="timeline-step" data-step="roast">
-                <div class="timeline-icon">
-                    <i class="fas fa-fire"></i>
-                </div>
-                <div class="timeline-text">درجة التحميص</div>
-            </div>
-            <div class="timeline-step" data-step="brew">
-                <div class="timeline-icon">
-                    <i class="fas fa-mug-hot"></i>
-                </div>
-                <div class="timeline-text">طريقة التحضير</div>
-            </div>
-            <div class="timeline-step" data-step="taste">
-                <div class="timeline-icon">
-                    <i class="fas fa-chart-pie"></i>
-                </div>
-                <div class="timeline-text">خصائص النكهة</div>
-            </div>
-            <div class="timeline-step" data-step="share">
-                <div class="timeline-icon">
-                    <i class="fas fa-share-alt"></i>
-                </div>
-                <div class="timeline-text">مشاركة وصفتك</div>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">قهوتي</h1>
+            <p class="hero-subtitle">تجربة فريدة لتصميم وتحضير القهوة المختصة</p>
+            <div class="btn-group">
+                <a href="#design-flavor" class="btn">تصميم النكهة</a>
+                <a href="#prepare-coffee" class="btn btn-secondary">تحضير القهوة</a>
             </div>
         </div>
-        
-        <!-- Beans Selection Section -->
-        <section id="beans-section" class="fade-in" style="animation-delay: 0.7s;">
-            <h2 class="section-title">اختيار أنواع الحبوب</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bean-type" onclick="selectBean(this, 'arabica')">
-                    <div class="bean-icon">
-                        <i class="fas fa-seedling coffee-bean"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-lg">أرابيكا (Arabica)</h3>
-                        <p class="text-sm">نكهات متعددة ومعقدة، حموضة عالية، حلاوة واضحة</p>
-                    </div>
-                </div>
-                
-                <div class="bean-type" onclick="selectBean(this, 'robusta')">
-                    <div class="bean-icon">
-                        <i class="fas fa-seedling coffee-bean"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-lg">روبوستا (Robusta)</h3>
-                        <p class="text-sm">نكهة قوية، مرارة أعلى، جسم ثقيل، كافيين أكثر</p>
-                    </div>
-                </div>
-                
-                <div class="bean-type" onclick="selectBean(this, 'blend')">
-                    <div class="bean-icon">
-                        <i class="fas fa-seedling coffee-bean"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-lg">خليط (Blend)</h3>
-                        <p class="text-sm">مزيج متوازن من أنواع مختلفة، نكهة متناغمة</p>
-                    </div>
-                </div>
-                
-                <div class="bean-type" onclick="selectBean(this, 'specialty')">
-                    <div class="bean-icon">
-                        <i class="fas fa-award coffee-bean"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-lg">قهوة مختصة (Specialty)</h3>
-                        <p class="text-sm">حبوب فاخرة عالية الجودة، خصائص فريدة من نوعها</p>
-                    </div>
-                </div>
+    </section>
+    
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progress-bar">
+        <div class="progress-steps">
+            <div class="step active" data-step="1">
+                <div class="step-number">1</div>
+                <div class="step-label">اختيار البلد</div>
             </div>
-            
-            <div class="card mt-6">
-                <h3 class="font-bold text-lg mb-3">بلد المنشأ</h3>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="country-option flex items-center p-3 border rounded cursor-pointer hover:bg-gray-50 transition-colors" onclick="selectCountry(this, 'ethiopia')">
-                        <img src="https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/ET.svg" width="30" class="ml-3" alt="إثيوبيا">
-                        <div>
-                            <h4 class="font-semibold">إثيوبيا</h4>
-                            <p class="text-xs text-gray-600">حموضة عالية، نكهات فاكهية، زهرية</p>
-                        </div>
-                    </div>
-                    <div class="country-option flex items-center p-3 border rounded cursor-pointer hover:bg-gray-50 transition-colors" onclick="selectCountry(this, 'colombia')">
-                        <img src="https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/CO.svg" width="30" class="ml-3" alt="كولومبيا">
-                        <div>
-                            <h4 class="font-semibold">كولومبيا</h4>
-                            <p class="text-xs text-gray-600">متوازنة، حلاوة جيدة، نكهات الجوز والكراميل</p>
-                        </div>
-                    </div>
-                    <div class="country-option flex items-center p-3 border rounded cursor-pointer hover:bg-gray-50 transition-colors" onclick="selectCountry(this, 'brazil')">
-                        <img src="https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/BR.svg" width="30" class="ml-3" alt="البرازيل">
-                        <div>
-                            <h4 class="font-semibold">البرازيل</h4>
-                            <p class="text-xs text-gray-600">جسم غني، شوكولاتة، مكسرات، حموضة منخفضة</p>
-                        </div>
-                    </div>
-                    <div class="country-option flex items-center p-3 border rounded cursor-pointer hover:bg-gray-50 transition-colors" onclick="selectCountry(this, 'yemen')">
-                        <img src="https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/YE.svg" width="30" class="ml-3" alt="اليمن">
-                        <div>
-                            <h4 class="font-semibold">اليمن</h4>
-                            <p class="text-xs text-gray-600">تعقيد عالي، توابل، فواكه جافة، عمق نكهة</p>
-                        </div>
-                    </div>
-                    <div class="country-option flex items-center p-3 border rounded cursor-pointer hover:bg-gray-50 transition-colors" onclick="selectCountry(this, 'indonesia')">
-                        <img src="https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/ID.svg" width="30" class="ml-3" alt="إندونيسيا">
-                        <div>
-                            <h4 class="font-semibold">إندونيسيا</h4>
-                            <p class="text-xs text-gray-600">جسم ثقيل، ترابية، عشبية، حموضة منخفضة</p>
-                        </div>
-                    </div>
-                    <div class="country-option flex items-center p-3 border rounded cursor-pointer hover:bg-gray-50 transition-colors" onclick="selectCountry(this, 'kenya')">
-                        <img src="https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/KE.svg" width="30" class="ml-3" alt="كينيا">
-                        <div>
-                            <h4 class="font-semibold">كينيا</h4>
-                            <p class="text-xs text-gray-600">حموضة فاكهية قوية، توت، حمضيات، جسم كامل</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="step" data-step="2">
+                <div class="step-number">2</div>
+                <div class="step-label">درجة التحميص</div>
             </div>
-            
-            <div class="mt-6 text-center">
-                <button class="btn" onclick="nextStep('beans', 'roast')">
-                    <span>التالي: اختيار درجة التحميص</span>
-                    <i class="fas fa-arrow-left mr-2"></i>
-                </button>
+            <div class="step" data-step="3">
+                <div class="step-number">3</div>
+                <div class="step-label">نوع الحبوب</div>
             </div>
-        </section>
-        
-        <!-- Roast Selection Section -->
-        <section id="roast-section" class="mt-10 hidden fade-in">
-            <h2 class="section-title">اختيار درجة التحميص</h2>
-            
-            <div class="card">
-                <p class="mb-4">درجة التحميص تؤثر بشكل كبير على نكهة القهوة:</p>
-                
-                <div class="roast-levels">
-                    <div class="roast-level" onclick="selectRoast(this, 'light')">
-                        <div class="roast-circle roast-circle-light"></div>
-                        <span class="text-sm">فاتح</span>
-                        <div class="text-xs mt-1 text-gray-600">حموضة عالية، نكهات فاكهية</div>
-                    </div>
-                    
-                    <div class="roast-level" onclick="selectRoast(this, 'medium-light')">
-                        <div class="roast-circle" style="background: #b87941;"></div>
-                        <span class="text-sm">متوسط فاتح</span>
-                        <div class="text-xs mt-1 text-gray-600">توازن نكهات، حلاوة</div>
-                    </div>
-                    
-                    <div class="roast-level" onclick="selectRoast(this, 'medium')">
-                        <div class="roast-circle roast-circle-medium"></div>
-                        <span class="text-sm">متوسط</span>
-                        <div class="text-xs mt-1 text-gray-600">توازن، جسم كامل</div>
-                    </div>
-                    
-                    <div class="roast-level" onclick="selectRoast(this, 'medium-dark')">
-                        <div class="roast-circle" style="background: #603311;"></div>
-                        <span class="text-sm">متوسط داكن</span>
-                        <div class="text-xs mt-1 text-gray-600">مرارة خفيفة، كراميل</div>
-                    </div>
-                    
-                    <div class="roast-level" onclick="selectRoast(this, 'dark')">
-                        <div class="roast-circle roast-circle-dark"></div>
-                        <span class="text-sm">داكن</span>
-                        <div class="text-xs mt-1 text-gray-600">مرارة، زيتي، محمص</div>
-                    </div>
-                </div>
+            <div class="step" data-step="4">
+                <div class="step-number">4</div>
+                <div class="step-label">الخصائص الحسية</div>
             </div>
-            
-            <div class="card mt-6">
-                <h3 class="font-bold text-lg mb-3">الارتفاع</h3>
-                <p class="mb-4">ارتفاع زراعة البن يؤثر على تطور النكهة في الحبوب:</p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="altitude-option p-4 border rounded cursor-pointer hover:bg-gray-50 transition-colors" onclick="selectAltitude(this, 'low')">
-                        <h4 class="font-semibold">منخفض (800-1200 متر)</h4>
-                        <p class="text-sm text-gray-600">جسم أقوى، حموضة أقل، نكهات أقل تعقيدًا</p>
-                    </div>
-                    <div class="altitude-option p-4 border rounded cursor-pointer hover:bg-gray-50 transition-colors" onclick="selectAltitude(this, 'medium')">
-                        <h4 class="font-semibold">متوسط (1200-1500 متر)</h4>
-                        <p class="text-sm text-gray-600">توازن أفضل بين الحموضة والجسم، نكهات متوسطة التعقيد</p>
-                    </div>
-                    <div class="altitude-option p-4 border rounded cursor-pointer hover:bg-gray-50 transition-colors" onclick="selectAltitude(this, 'high')">
-                        <h4 class="font-semibold">مرتفع (1500-2000+ متر)</h4>
-                        <p class="text-sm text-gray-600">حموضة أعلى، نكهات معقدة وفاكهية، خفة الجسم</p>
-                    </div>
-                </div>
+            <div class="step" data-step="5">
+                <div class="step-number">5</div>
+                <div class="step-label">التحضير</div>
             </div>
-            
-            <div class="card mt-6">
-                <h3 class="font-bold text-lg mb-3">طريقة المعالجة</h3>
-                <p class="mb-4">طريقة معالجة حبوب البن بعد الحصاد تؤثر على نكهتها النهائية:</p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="process-option p-4 border rounded cursor-pointer hover:bg-gray-50 transition-colors" onclick="selectProcess(this, 'washed')">
-                        <h4 class="font-semibold">طريقة مغسولة</h4>
-                        <p class="text-sm text-gray-600">نظافة النكهة، وضوح الحموضة، نكهات صافية</p>
-                    </div>
-                    <div class="process-option p-4 border rounded cursor-pointer hover:bg-gray-50 transition-colors" onclick="selectProcess(this, 'natural')">
-                        <h4 class="font-semibold">طريقة مجففة (طبيعية)</h4>
-                        <p class="text-sm text-gray-600">جسم أثقل، حلاوة أكبر، نكهات فاكهية أكثر كثافة</p>
-                    </div>
-                    <div class="process-option p-4 border rounded cursor-pointer hover:bg-gray-50 transition-colors" onclick="selectProcess(this, 'honey')">
-                        <h4 class="font-semibold">طريقة العسل</h4>
-                        <p class="text-sm text-gray-600">توازن بين الطريقتين، مع حلاوة مميزة وجسم متوسط</p>
-                    </div>
-                </div>
+            <div class="step" data-step="6">
+                <div class="step-number">6</div>
+                <div class="step-label">المشاركة</div>
             </div>
-            
-            <div class="mt-6 text-center flex justify-center gap-4">
-                <button class="btn bg-gray-400 hover:bg-gray-500" onclick="prevStep('roast', 'beans')">
-                    <i class="fas fa-arrow-right ml-2"></i>
-                    <span>السابق</span>
-                </button>
-                <button class="btn" onclick="nextStep('roast', 'brew')">
-                    <span>التالي: طريقة التحضير</span>
-                    <i class="fas fa-arrow-left mr-2"></i>
-                </button>
-            </div>
-        </section>
-        
-        <!-- Brewing Method Section -->
-        <section id="brew-section" class="mt-10 hidden fade-in">
-            <h2 class="section-title">اختيار طريقة التحضير</h2>
-            
-            <div class="brew-methods">
-                <div class="brew-method" onclick="selectBrewMethod(this, 'espresso')">
-                    <div class="brew-icon">
-                        <i class="fas fa-mug-hot"></i>
-                    </div>
-                    <h3 class="font-bold">إسبريسو</h3>
-                    <p class="text-sm">استخلاص تحت ضغط عالي، قهوة مركزة</p>
-                </div>
-                
-                <div class="brew-method" onclick="selectBrewMethod(this, 'filter')">
-                    <div class="brew-icon">
-                        <i class="fas fa-filter"></i>
-                    </div>
-                    <h3 class="font-bold">تقطير (فلتر)</h3>
-                    <p class="text-sm">V60، كيمكس، قهوة نظيفة وواضحة النكهة</p>
-                </div>
-                
-                <div class="brew-method" onclick="selectBrewMethod(this, 'french')">
-                    <div class="brew-icon">
-                        <i class="fas fa-glass-whiskey"></i>
-                    </div>
-                    <h3 class="font-bold">فرنش برس</h3>
-                    <p class="text-sm">غمر كامل، جسم غني وقوام أكثر كثافة</p>
-                </div>
-                
-                <div class="brew-method" onclick="selectBrewMethod(this, 'aeropress')">
-                    <div class="brew-icon">
-                        <i class="fas fa-syringe"></i>
-                    </div>
-                    <h3 class="font-bold">إيروبرس</h3>
-                    <p class="text-sm">مزيج من الضغط والترشيح، مرونة كبيرة</p>
-                </div>
-                
-                <div class="brew-method" onclick="selectBrewMethod(this, 'moka')">
-                    <div class="brew-icon">
-                        <i class="fas fa-coffee"></i>
-                    </div>
-                    <h3 class="font-bold">موكا بوت</h3>
-                    <p class="text-sm">قهوة مركزة بضغط بخار، القهوة الإيطالية التقليدية</p>
-                </div>
-                
-                <div class="brew-method" onclick="selectBrewMethod(this, 'cold')">
-                    <div class="brew-icon">
-                        <i class="fas fa-cube"></i>
-                    </div>
-                    <h3 class="font-bold">التخمير البارد</h3>
-                    <p class="text-sm">تخمير بارد لمدة طويلة، حموضة أقل، نعومة</p>
-                </div>
-            </div>
-            
-            <div class="ratio-calculator mt-8">
-                <h3 class="font-bold text-lg mb-3">حاسبة النسبة (الريشو)</h3>
-                <p class="mb-4">حساب النسبة المثالية بين القهوة والماء</p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block mb-2">نسبة القهوة : الماء</label>
-                        <select id="ratio-select" class="calc-select" onchange="updateRatioCalculation()">
-                            <option value="14">1:14 (مثالي للإسبريسو وموكا)</option>
-                            <option value="15">1:15 (مناسب للفرنش برس)</option>
-                            <option value="16" selected>1:16 (متوازن للأيروبرس)</option>
-                            <option value="17">1:17 (مثالي للتنقيط V60، كيمكس)</option>
-                            <option value="18">1:18 (مناسب للقهوة المقطرة الباردة)</option>
-                        </select>
-                        
-                        <div class="mt-4">
-                            <label class="block mb-2">كمية القهوة (جرام)</label>
-                            <input type="number" id="coffee-input" class="calc-input" value="18" min="1" onchange="updateWaterFromCoffee()">
-                        </div>
-                        
-                        <div class="mt-4">
-                            <label class="block mb-2">كمية الماء (مل)</label>
-                            <input type="number" id="water-input" class="calc-input" value="288" min="1" onchange="updateCoffeeFromWater()">
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                        <h4 class="font-bold mb-3">توصيات النسب المثالية:</h4>
-                        <ul class="text-sm space-y-2">
-                            <li><span class="font-bold">إسبريسو:</span> 1:2 (18 جرام قهوة : 36 مل ماء)</li>
-                            <li><span class="font-bold">تقطير V60:</span> 1:16 إلى 1:17</li>
-                            <li><span class="font-bold">فرنش برس:</span> 1:15</li>
-                            <li><span class="font-bold">إيروبرس:</span> 1:12 إلى 1:16 (متنوع)</li>
-                            <li><span class="font-bold">التخمير البارد:</span> 1:8 (مركز) ثم يخفف بالماء/الثلج</li>
-                        </ul>
-                        
-                        <div class="mt-4 p-3 bg-white rounded border">
-                            <p class="text-center font-bold text-lg" id="ratio-result">
-                                18 جرام قهوة : 288 مل ماء (1:16)
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-6 text-center flex justify-center gap-4">
-                <button class="btn bg-gray-400 hover:bg-gray-500" onclick="prevStep('brew', 'roast')">
-                    <i class="fas fa-arrow-right ml-2"></i>
-                    <span>السابق</span>
-                </button>
-                <button class="btn" onclick="nextStep('brew', 'taste')">
-                    <span>التالي: خصائص النكهة</span>
-                    <i class="fas fa-arrow-left mr-2"></i>
-                </button>
-            </div>
-        </section>
-        
-        <!-- Taste Profile Section -->
-        <section id="taste-section" class="mt-10 hidden fade-in">
-            <h2 class="section-title">خصائص النكهة</h2>
-            
-            <div class="card">
-                <h3 class="font-bold text-lg mb-3">ملف النكهة الخاص بك</h3>
-                <p class="mb-6">بناءً على اختياراتك، هذا هو ملف النكهة المتوقع لقهوتك:</p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                    <div class="radar-chart-container">
-                        <svg class="radar-chart" viewBox="0 0 400 400">
-                            <!-- Background circles -->
-                            <circle cx="200" cy="200" r="150" fill="none" stroke="#e8ddcb" stroke-width="1" />
-                            <circle cx="200" cy="200" r="120" fill="none" stroke="#e8ddcb" stroke-width="1" />
-                            <circle cx="200" cy="200" r="90" fill="none" stroke="#e8ddcb" stroke-width="1" />
-                            <circle cx="200" cy="200" r="60" fill="none" stroke="#e8ddcb" stroke-width="1" />
-                            <circle cx="200" cy="200" r="30" fill="none" stroke="#e8ddcb" stroke-width="1" />
-                            
-                            <!-- Radar lines -->
-                            <line x1="200" y1="50" x2="200" y2="350" stroke="#e8ddcb" stroke-width="1" />
-                            <line x1="50" y1="200" x2="350" y2="200" stroke="#e8ddcb" stroke-width="1" />
-                            <line x1="96.97" y1="96.97" x2="303.03" y2="303.03" stroke="#e8ddcb" stroke-width="1" />
-                            <line x1="96.97" y1="303.03" x2="303.03" y2="96.97" stroke="#e8ddcb" stroke-width="1" />
-                            
-                            <!-- Labels -->
-                            <text x="200" y="40" font-size="12" text-anchor="middle" fill="#6e5544">الحموضة</text>
-                            <text x="360" y="200" font-size="12" text-anchor="start" fill="#6e5544">المرارة</text>
-                            <text x="200" y="370" font-size="12" text-anchor="middle" fill="#6e5544">الحلاوة</text>
-                            <text x="30" y="200" font-size="12" text-anchor="end" fill="#6e5544">الجسم</text>
-                            <text x="315" y="100" font-size="12" text-anchor="middle" fill="#6e5544">التعقيد</text>
-                            
-                            <!-- Radar plot -->
-                            <polygon id="flavor-radar" points="200,80 300,200 200,280 100,200 280,120" fill="rgba(184, 126, 69, 0.3)" stroke="#b87e45" stroke-width="2" />
-                            
-                            <!-- Radar points -->
-                            <circle cx="200" cy="80" r="5" fill="#b87e45" />
-                            <circle cx="300" cy="200" r="5" fill="#b87e45" />
-                            <circle cx="200" cy="280" r="5" fill="#b87e45" />
-                            <circle cx="100" cy="200" r="5" fill="#b87e45" />
-                            <circle cx="280" cy="120" r="5" fill="#b87e45" />
-                        </svg>
-                    </div>
-                    
-                    <div>
-                        <div class="mb-4">
-                            <label class="block mb-1">الحموضة</label>
-                            <div class="flex items-center">
-                                <input type="range" id="acidity-slider" min="1" max="5" value="4" class="w-full" onchange="updateFlavorRadar()">
-                                <span id="acidity-value" class="mr-2 min-w-[30px] text-center">4</span>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label class="block mb-1">المرارة</label>
-                            <div class="flex items-center">
-                                <input type="range" id="bitterness-slider" min="1" max="5" value="3" class="w-full" onchange="updateFlavorRadar()">
-                                <span id="bitterness-value" class="mr-2 min-w-[30px] text-center">3</span>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label class="block mb-1">الحلاوة</label>
-                            <div class="flex items-center">
-                                <input type="range" id="sweetness-slider" min="1" max="5" value="4" class="w-full" onchange="updateFlavorRadar()">
-                                <span id="sweetness-value" class="mr-2 min-w-[30px] text-center">4</span>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label class="block mb-1">الجسم</label>
-                            <div class="flex items-center">
-                                <input type="range" id="body-slider" min="1" max="5" value="2" class="w-full" onchange="updateFlavorRadar()">
-                                <span id="body-value" class="mr-2 min-w-[30px] text-center">2</span>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label class="block mb-1">التعقيد</label>
-                            <div class="flex items-center">
-                                <input type="range" id="complexity-slider" min="1" max="5" value="4" class="w-full" onchange="updateFlavorRadar()">
-                                <span id="complexity-value" class="mr-2 min-w-[30px] text-center">4</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="mt-6 p-4 bg-gray-50 rounded-lg">
-                    <h4 class="font-bold mb-2">وصف النكهة المتوقع:</h4>
-                    <p id="flavor-description" class="text-lg">
-                        قهوة حيوية تتميز بحموضة واضحة وحلاوة طبيعية. تحتوي على نكهات فاكهية متعددة الطبقات مثل التوت الأحمر والحمضيات، مع لمسات من النكهات الزهرية. الجسم خفيف إلى متوسط مع تعقيد نكهات عالي.
-                    </p>
-                </div>
-            </div>
-            
-            <div class="mt-6 text-center flex justify-center gap-4">
-                <button class="btn bg-gray-400 hover:bg-gray-500" onclick="prevStep('taste', 'brew')">
-                    <i class="fas fa-arrow-right ml-2"></i>
-                    <span>السابق</span>
-                </button>
-                <button class="btn" onclick="nextStep('taste', 'share')">
-                    <span>التالي: مشاركة وصفتك</span>
-                    <i class="fas fa-arrow-left mr-2"></i>
-                </button>
-            </div>
-        </section>
-        
-        <!-- Share Recipe Section -->
-        <section id="share-section" class="mt-10 hidden fade-in">
-            <h2 class="section-title">مشاركة وصفتك</h2>
-            
-            <div class="card">
-                <h3 class="font-bold text-lg mb-3">ملخص وصفة قهوتك</h3>
-                
-                <div class="share-preview">
-                    <h4 class="font-bold text-xl mb-3">وصفة قهوتي المميزة ☕</h4>
-                    
-                    <div class="mb-3">
-                        <span class="font-bold">نوع الحبوب:</span>
-                        <span id="summary-bean">أرابيكا</span>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <span class="font-bold">بلد المنشأ:</span>
-                        <span id="summary-origin">إثيوبيا</span>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <span class="font-bold">درجة التحميص:</span>
-                        <span id="summary-roast">متوسط فاتح</span>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <span class="font-bold">طريقة التحضير:</span>
-                        <span id="summary-brew">تقطير (V60)</span>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <span class="font-bold">النسبة:</span>
-                        <span id="summary-ratio">1:16 (18 جرام : 288 مل)</span>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <span class="font-bold">خصائص النكهة:</span><br>
-                        <span id="summary-profile">حموضة عالية، حلاوة متوسطة، تعقيد نكهات مميز، جسم خفيف، مع نكهات الفواكه والزهور.</span>
-                    </div>
-                    
-                    <p class="mt-4 text-sm text-gray-600">
-                        شاركني رأيك إذا جربت هذه الوصفة! اكتشف المزيد من وصفات القهوة المميزة على تطبيق "قهوتي" 🌟
-                    </p>
-                </div>
-                
-                <div class="mt-6">
-                    <h4 class="font-bold mb-3">مشاركة الوصفة</h4>
-                    <div class="social-share">
-                        <a href="#" id="whatsapp-share" class="social-btn whatsapp-btn" onclick="shareOnWhatsapp()">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <a href="https://www.instagram.com/alyazeedi.s" target="_blank" class="social-btn instagram-btn">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-6 text-center">
-                <button class="btn bg-gray-400 hover:bg-gray-500" onclick="prevStep('share', 'taste')">
-                    <i class="fas fa-arrow-right ml-2"></i>
-                    <span>السابق</span>
-                </button>
-            </div>
-        </section>
-        
-        <!-- Seasonal Coffee Calendar -->
-        <section class="seasonal-calendar fade-in" style="animation-delay: 1s;">
-            <h2 class="font-bold text-xl mb-4">تقويم القهوة الموسمي</h2>
-            <p class="mb-4">تختلف جودة وتوفر القهوة باختلاف مواسم الحصاد في مختلف البلدان:</p>
-            
-            <div class="flex flex-wrap justify-center">
-                <div id="jan" class="month-highlight">يناير</div>
-                <div id="feb" class="month-highlight">فبراير</div>
-                <div id="mar" class="month-highlight">مارس</div>
-                <div id="apr" class="month-highlight">أبريل</div>
-                <div id="may" class="month-highlight">مايو</div>
-                <div id="jun" class="month-highlight">يونيو</div>
-                <div id="jul" class="month-highlight">يوليو</div>
-                <div id="aug" class="month-highlight">أغسطس</div>
-                <div id="sep" class="month-highlight">سبتمبر</div>
-                <div id="oct" class="month-highlight">أكتوبر</div>
-                <div id="nov" class="month-highlight">نوفمبر</div>
-                <div id="dec" class="month-highlight">ديسمبر</div>
-            </div>
-            
-            <div id="seasonal-recommendation" class="mt-4 p-4 bg-white rounded-lg border">
-                <h4 class="font-bold mb-2">توصيات <span id="current-month">الشهر الحالي</span>:</h4>
-                <div id="current-beans" class="text-sm">
-                    <p><strong>أفضل المحاصيل المتوفرة:</strong></p>
-                    <ul id="harvest-list" class="pr-5 space-y-1">
-                        <!-- Will be populated by JavaScript -->
-                    </ul>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Coffee Glossary -->
-        <section class="mt-10 fade-in" style="animation-delay: 1.2s;">
-            <h2 class="section-title">مصطلحات القهوة</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="card">
-                    <h3 class="font-bold text-lg">الخصائص الحسية</h3>
-                    <ul class="mt-3 space-y-3">
-                        <li>
-                            <span class="font-bold">الحموضة:</span>
-                            <p class="text-sm">إحساس حيوي ومنعش في القهوة، غالبًا ما يوصف بالفواكه الحمضية مثل الليمون أو التفاح.</p>
-                        </li>
-                        <li>
-                            <span class="font-bold">المرارة:</span>
-                            <p class="text-sm">طعم متأصل في القهوة، يزداد مع درجة التحميص، ويمكن أن يكون مرغوبًا باعتدال.</p>
-                        </li>
-                        <li>
-                            <span class="font-bold">الحلاوة:</span>
-                            <p class="text-sm">إحساس حلو طبيعي ناتج عن السكريات في حبوب البن، غالبًا ما يشبه الكراميل أو العسل.</p>
-                        </li>
-                        <li>
-                            <span class="font-bold">الجسم:</span>
-                            <p class="text-sm">وزن وقوام القهوة في الفم، من خفيف وشفاف إلى ثقيل وكريمي.</p>
-                        </li>
-                        <li>
-                            <span class="font-bold">التعقيد:</span>
-                            <p class="text-sm">تعدد طبقات النكهة وتنوعها، تشير إلى وجود العديد من النكهات المختلفة بشكل متناغم.</p>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="card">
-                    <h3 class="font-bold text-lg">مصطلحات التحضير</h3>
-                    <ul class="mt-3 space-y-3">
-                        <li>
-                            <span class="font-bold">الريشو (Ratio):</span>
-                            <p class="text-sm">نسبة وزن القهوة إلى وزن الماء المستخدم في التحضير.</p>
-                        </li>
-                        <li>
-                            <span class="font-bold">الاستخلاص (Extraction):</span>
-                            <p class="text-sm">عملية استخراج المواد المذاقية من حبوب القهوة المطحونة باستخدام الماء.</p>
-                        </li>
-                        <li>
-                            <span class="font-bold">وقت التخمير (Brew Time):</span>
-                            <p class="text-sm">المدة التي يبقى فيها الماء على اتصال مع القهوة المطحونة.</p>
-                        </li>
-                        <li>
-                            <span class="font-bold">درجة الطحن (Grind Size):</span>
-                            <p class="text-sm">حجم جزيئات القهوة المطحونة، تتراوح من ناعمة جدًا (للإسبريسو) إلى خشنة (للفرنش برس).</p>
-                        </li>
-                        <li>
-                            <span class="font-bold">بلوم (Bloom):</span>
-                            <p class="text-sm">ترطيب القهوة بكمية صغيرة من الماء قبل التخمير الكامل للسماح بخروج ثاني أكسيد الكربون.</p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        
-        <footer class="mt-10 text-center p-6 border-t border-gray-200 fade-in" style="animation-delay: 1.4s;">
-            <p>تصميم وتطوير: <a href="https://www.instagram.com/alyazeedi.s" target="_blank" class="text-accent-color hover:underline">سلطان اليزيدي</a></p>
-            <p class="text-sm mt-2">alyazeede@gmail.com</p>
-        </footer>
+        </div>
     </div>
     
+    <!-- Design Flavor Section -->
+    <section class="section" id="design-flavor">
+        <div class="container">
+            <h2 class="section-title decorative-title">تصميم نكهتك الخاصة</h2>
+            <p class="text-center">اختر الخصائص المثالية للقهوة التي تناسب ذوقك</p>
+            
+            <div class="coffee-divider">
+                <span class="coffee-divider-icon">☕</span>
+            </div>
+            
+            <!-- Country Selection -->
+            <div class="section-content" id="country-selection">
+                <h3>اختر بلد المنشأ</h3>
+                <p>بلد المنشأ يحدد الخصائص الأساسية للقهوة من خلال المناخ والتربة والارتفاع</p>
+                
+                <div class="grid">
+                    <div class="country-card" data-country="ethiopia" onclick="selectCountry(this)">
+                        <img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.14.0/flags/4x3/et.svg" alt="إثيوبيا" class="country-flag">
+                        <div class="country-name">إثيوبيا</div>
+                        <div class="country-feature">حموضة عالية، نكهات زهرية</div>
+                    </div>
+                    <div class="country-card" data-country="brazil" onclick="selectCountry(this)">
+                        <img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.14.0/flags/4x3/br.svg" alt="البرازيل" class="country-flag">
+                        <div class="country-name">البرازيل</div>
+                        <div class="country-feature">جسم قوي، حلاوة عالية</div>
+                    </div>
+                    <div class="country-card" data-country="colombia" onclick="selectCountry(this)">
+                        <img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.14.0/flags/4x3/co.svg" alt="كولومبيا" class="country-flag">
+                        <div class="country-name">كولومبيا</div>
+                        <div class="country-feature">متوازنة، نكهات فواكه</div>
+                    </div>
+                    <div class="country-card" data-country="yemen" onclick="selectCountry(this)">
+                        <img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.14.0/flags/4x3/ye.svg" alt="اليمن" class="country-flag">
+                        <div class="country-name">اليمن</div>
+                        <div class="country-feature">نكهات توابل، فواكه مجففة</div>
+                    </div>
+                    <div class="country-card" data-country="indonesia" onclick="selectCountry(this)">
+                        <img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.14.0/flags/4x3/id.svg" alt="إندونيسيا" class="country-flag">
+                        <div class="country-name">إندونيسيا</div>
+                        <div class="country-feature">جسم ثقيل، نكهات ترابية</div>
+                    </div>
+                    <div class="country-card" data-country="costa-rica" onclick="selectCountry(this)">
+                        <img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.14.0/flags/4x3/cr.svg" alt="كوستاريكا" class="country-flag">
+                        <div class="country-name">كوستاريكا</div>
+                        <div class="country-feature">حموضة معتدلة، نكهة فواكه</div>
+                    </div>
+                    <div class="country-card" data-country="kenya" onclick="selectCountry(this)">
+                        <img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.14.0/flags/4x3/ke.svg" alt="كينيا" class="country-flag">
+                        <div class="country-name">كينيا</div>
+                        <div class="country-feature">حموضة لاذعة، نكهة توت</div>
+                    </div>
+                    <div class="country-card" data-country="guatemala" onclick="selectCountry(this)">
+                        <img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.14.0/flags/4x3/gt.svg" alt="غواتيمالا" class="country-flag">
+                        <div class="country-name">غواتيمالا</div>
+                        <div class="country-feature">حلاوة، نكهات حمضيات</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="coffee-divider">
+                <span class="coffee-divider-icon">☕</span>
+            </div>
+            
+            <!-- Roast Degree -->
+            <div class="section-content" id="roast-selection">
+                <h3>اختر درجة التحميص</h3>
+                <p>درجة التحميص تؤثر بشكل كبير على النكهة، الحموضة، والمرارة</p>
+                
+                <div class="roast-options">
+                    <div class="roast-option" data-roast="light" onclick="selectRoast(this)">
+                        <div class="roast-circle roast-light"></div>
+                        <div class="roast-name">تحميص خفيف</div>
+                        <div class="roast-desc">حموضة عالية، نكهات فاكهية وزهرية واضحة</div>
+                    </div>
+                    <div class="roast-option" data-roast="medium" onclick="selectRoast(this)">
+                        <div class="roast-circle roast-medium"></div>
+                        <div class="roast-name">تحميص متوسط</div>
+                        <div class="roast-desc">توازن بين الحموضة والمرارة، نكهات متنوعة</div>
+                    </div>
+                    <div class="roast-option" data-roast="dark" onclick="selectRoast(this)">
+                        <div class="roast-circle roast-dark"></div>
+                        <div class="roast-name">تحميص داكن</div>
+                        <div class="roast-desc">مرارة عالية، نكهات محروقة، جسم ثقيل</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="coffee-divider">
+                <span class="coffee-divider-icon">☕</span>
+            </div>
+            
+            <!-- Bean Types -->
+            <div class="section-content" id="bean-selection">
+                <h3>اختر نوع الحبوب</h3>
+                <p>نوع الحبوب له تأثير كبير على نكهة وخصائص القهوة النهائية</p>
+                
+                <div class="bean-types">
+                    <div class="bean-type" data-bean="arabica" onclick="selectBean(this)">
+                        <img src="https://images.unsplash.com/photo-1610889556528-9a770e32642f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="أرابيكا" class="bean-image">
+                        <div class="bean-name">أرابيكا</div>
+                        <div class="bean-desc">نكهات متنوعة، حموضة أعلى، حلاوة واضحة. تشكل 60-70% من إنتاج القهوة العالمي.</div>
+                    </div>
+                    <div class="bean-type" data-bean="robusta" onclick="selectBean(this)">
+                        <img src="https://images.unsplash.com/photo-1593543396541-9cde27526e94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="روبوستا" class="bean-image">
+                        <div class="bean-name">روبوستا</div>
+                        <div class="bean-desc">نكهة أقوى، مرارة أعلى، نسبة كافيين أعلى. تستخدم غالباً في الإسبريسو وخلطات القهوة الإيطالية.</div>
+                    </div>
+                    <div class="bean-type" data-bean="liberica" onclick="selectBean(this)">
+                        <img src="https://images.unsplash.com/photo-1595434091143-b375ced5fe5c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="ليبريكا" class="bean-image">
+                        <div class="bean-name">ليبريكا</div>
+                        <div class="bean-desc">حبوب كبيرة الحجم، نكهة فريدة تجمع بين طعم الفاكهة والزهور. نادرة وتزرع بشكل أساسي في آسيا.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="coffee-divider">
+                <span class="coffee-divider-icon">☕</span>
+            </div>
+            
+            <!-- Characteristics -->
+            <div class="section-content" id="characteristics-selection">
+                <h3>الخصائص الحسية</h3>
+                <p>اضبط الخصائص الحسية لتناسب ذوقك الشخصي</p>
+                
+                <div class="characteristics">
+                    <div class="characteristic">
+                        <div class="characteristic-label">
+                            <span class="characteristic-name">الحموضة</span>
+                            <span class="characteristic-value" id="acidity-value">3</span>
+                        </div>
+                        <div class="range-container">
+                            <input type="range" min="1" max="5" value="3" class="range-slider" id="acidity-slider" oninput="updateCharacteristic('acidity', this.value)">
+                        </div>
+                    </div>
+                    
+                    <div class="characteristic">
+                        <div class="characteristic-label">
+                            <span class="characteristic-name">المرارة</span>
+                            <span class="characteristic-value" id="bitterness-value">3</span>
+                        </div>
+                        <div class="range-container">
+                            <input type="range" min="1" max="5" value="3" class="range-slider" id="bitterness-slider" oninput="updateCharacteristic('bitterness', this.value)">
+                        </div>
+                    </div>
+                    
+                    <div class="characteristic">
+                        <div class="characteristic-label">
+                            <span class="characteristic-name">الحلاوة</span>
+                            <span class="characteristic-value" id="sweetness-value">3</span>
+                        </div>
+                        <div class="range-container">
+                            <input type="range" min="1" max="5" value="3" class="range-slider" id="sweetness-slider" oninput="updateCharacteristic('sweetness', this.value)">
+                        </div>
+                    </div>
+                    
+                    <div class="characteristic">
+                        <div class="characteristic-label">
+                            <span class="characteristic-name">الجسم</span>
+                            <span class="characteristic-value" id="body-value">3</span>
+                        </div>
+                        <div class="range-container">
+                            <input type="range" min="1" max="5" value="3" class="range-slider" id="body-slider" oninput="updateCharacteristic('body', this.value)">
+                        </div>
+                    </div>
+                    
+                    <div class="characteristic">
+                        <div class="characteristic-label">
+                            <span class="characteristic-name">التعقيد</span>
+                            <span class="characteristic-value" id="complexity-value">3</span>
+                        </div>
+                        <div class="range-container">
+                            <input type="range" min="1" max="5" value="3" class="range-slider" id="complexity-slider" oninput="updateCharacteristic('complexity', this.value)">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flavor-profile">
+                    <h3>ملف النكهة</h3>
+                    <div class="radar-chart-container">
+                        <canvas id="flavor-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Coffee Preparation Section -->
+    <section class="section section-alt" id="prepare-coffee">
+        <div class="arabesque-pattern pattern-top"></div>
+        <div class="container">
+            <h2 class="section-title decorative-title">تحضير القهوة</h2>
+            <p class="text-center">اختر طريقة التحضير المناسبة واضبط الإعدادات للحصول على أفضل نتيجة</p>
+            
+            <div class="preparation-methods">
+                <div class="preparation-method" data-method="espresso" onclick="selectPreparationMethod(this)">
+                    <i class="fas fa-coffee preparation-icon"></i>
+                    <div class="preparation-name">إسبريسو</div>
+                    <div class="preparation-desc">ماء ساخن مضغوط عبر القهوة المطحونة بشكل ناعم. يعطي قهوة مركزة بطعم قوي.</div>
+                </div>
+                
+                <div class="preparation-method" data-method="french-press" onclick="selectPreparationMethod(this)">
+                    <i class="fas fa-glass-whiskey preparation-icon"></i>
+                    <div class="preparation-name">فرنش برس</div>
+                    <div class="preparation-desc">طريقة غمر تعطي قهوة ذات جسم ثقيل. سهلة التحضير وتبرز نكهات القهوة الطبيعية.</div>
+                </div>
+                
+                <div class="preparation-method" data-method="v60" onclick="selectPreparationMethod(this)">
+                    <i class="fas fa-filter preparation-icon"></i>
+                    <div class="preparation-name">V60</div>
+                    <div class="preparation-desc">طريقة تقطير تبرز الحموضة والنكهات الدقيقة. تعطي قهوة صافية ونظيفة.</div>
+                </div>
+                
+                <div class="preparation-method" data-method="aeropress" onclick="selectPreparationMethod(this)">
+                    <i class="fas fa-tint preparation-icon"></i>
+                    <div class="preparation-name">إيروبرس</div>
+                    <div class="preparation-desc">مزيج بين الغمر والضغط. تعطي قهوة نظيفة ولكن بجسم قوي.</div>
+                </div>
+                
+                <div class="preparation-method" data-method="cold-brew" onclick="selectPreparationMethod(this)">
+                    <i class="fas fa-snowflake preparation-icon"></i>
+                    <div class="preparation-name">كولد برو</div>
+                    <div class="preparation-desc">تخمير بارد لساعات طويلة. يعطي قهوة أقل حموضة ومرارة وأكثر حلاوة.</div>
+                </div>
+            </div>
+            
+            <div class="ratio-calculator">
+                <h3>حاسبة نسبة القهوة إلى الماء (الريشو)</h3>
+                <p>نسبة القهوة إلى الماء من أهم العوامل التي تؤثر على مذاق القهوة النهائي</p>
+                
+                <div class="calculator-form">
+                    <div>
+                        <div class="form-group">
+                            <label class="form-label">اختر نسبة الريشو</label>
+                            <select class="form-control" id="ratio-select" onchange="calculateRatio()">
+                                <option value="14">1:14 (مناسب للإسبريسو)</option>
+                                <option value="15">1:15 (مناسب للفرنش برس)</option>
+                                <option value="16" selected>1:16 (متوازن للأيروبرس)</option>
+                                <option value="17">1:17 (مناسب للتقطير V60)</option>
+                                <option value="18">1:18 (مناسب للكولد برو)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">وزن القهوة (جرام)</label>
+                            <input type="number" class="form-control" id="coffee-weight" value="15" min="1" oninput="calculateWaterFromCoffee()">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="form-group">
+                            <label class="form-label">كمية الماء (مل)</label>
+                            <input type="number" class="form-control" id="water-amount" value="240" min="1" oninput="calculateCoffeeFromWater()">
+                        </div>
+                        <div class="ratio-result" id="ratio-result">
+                            لتحضير قهوة مثالية، استخدم 15 جرام من القهوة مع 240 مل من الماء
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="coffee-divider">
+                <span class="coffee-divider-icon">☕</span>
+            </div>
+            
+            <div class="section-content" id="preparation-details">
+                <h3>تفاصيل التحضير</h3>
+                <p id="preparation-desc">اختر طريقة التحضير أعلاه للحصول على التفاصيل</p>
+                
+                <div class="card" id="preparation-card" style="display: none;">
+                    <div class="card-body">
+                        <h4 class="card-title" id="preparation-title">طريقة التحضير</h4>
+                        <div id="preparation-steps">
+                            <!-- Steps will be filled dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="arabesque-pattern pattern-bottom"></div>
+    </section>
+    
+    <!-- Share Section -->
+    <section class="section" id="share-section">
+        <div class="container">
+            <h2 class="section-title decorative-title">شارك وصفتك</h2>
+            <p class="text-center">شارك وصفة القهوة الخاصة بك مع أصدقائك</p>
+            
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">ملخص الوصفة</h3>
+                    
+                    <div id="recipe-summary">
+                        <p><strong>بلد المنشأ:</strong> <span id="summary-country">لم يتم الاختيار</span></p>
+                        <p><strong>درجة التحميص:</strong> <span id="summary-roast">لم يتم الاختيار</span></p>
+                        <p><strong>نوع الحبوب:</strong> <span id="summary-bean">لم يتم الاختيار</span></p>
+                        <p><strong>الخصائص الحسية:</strong></p>
+                        <ul>
+                            <li>الحموضة: <span id="summary-acidity">3</span>/5</li>
+                            <li>المرارة: <span id="summary-bitterness">3</span>/5</li>
+                            <li>الحلاوة: <span id="summary-sweetness">3</span>/5</li>
+                            <li>الجسم: <span id="summary-body">3</span>/5</li>
+                            <li>التعقيد: <span id="summary-complexity">3</span>/5</li>
+                        </ul>
+                        <p><strong>طريقة التحضير:</strong> <span id="summary-method">لم يتم الاختيار</span></p>
+                        <p><strong>نسبة الريشو:</strong> <span id="summary-ratio">1:16</span></p>
+                        <p><strong>كمية القهوة:</strong> <span id="summary-coffee-weight">15</span> جرام</p>
+                        <p><strong>كمية الماء:</strong> <span id="summary-water-amount">240</span> مل</p>
+                    </div>
+                    
+                    <div class="share-buttons">
+                        <a href="#" class="share-button share-whatsapp" onclick="shareWhatsApp()">
+                            <i class="fab fa-whatsapp"></i> مشاركة عبر واتساب
+                        </a>
+                        <a href="https://instagram.com/alyazeedi.s" target="_blank" class="share-button share-instagram">
+                            <i class="fab fa-instagram"></i> متابعة على انستجرام
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Glossary Section -->
+    <section class="section section-alt" id="glossary">
+        <div class="arabesque-pattern pattern-top"></div>
+        <div class="container">
+            <h2 class="section-title decorative-title">مصطلحات القهوة</h2>
+            <p class="text-center">تعرف على أهم المصطلحات في عالم القهوة المختصة</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">الريشو (Ratio)</h4>
+                        <p>نسبة وزن القهوة إلى وزن الماء المستخدم في التحضير. يؤثر بشكل كبير على قوة ونكهة القهوة.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">الحموضة (Acidity)</h4>
+                        <p>الطعم الحمضي اللامع في القهوة. قد تكون حموضة كالتفاح أو الحمضيات، وهي صفة إيجابية في القهوة المختصة.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">المرارة (Bitterness)</h4>
+                        <p>طعم مر في القهوة، يزداد مع درجة التحميص ويرتبط أيضًا بالاستخلاص الزائد.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">الحلاوة (Sweetness)</h4>
+                        <p>الطعم الحلو الطبيعي في القهوة، يمكن أن يشبه السكر البني، العسل، أو الكراميل.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">الجسم (Body)</h4>
+                        <p>إحساس الثقل أو الكثافة للقهوة في الفم. يمكن وصفه بالخفيف، المتوسط، أو الثقيل.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">درجة الطحن (Grind Size)</h4>
+                        <p>حجم جزيئات القهوة المطحونة، تختلف حسب طريقة التحضير. كلما كانت أدق، كان الاستخلاص أسرع.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">البلوم (Bloom)</h4>
+                        <p>مرحلة التهوية الأولية عند إضافة القليل من الماء للقهوة لإطلاق ثاني أكسيد الكربون قبل بدء التخمير.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">الكريما (Crema)</h4>
+                        <p>طبقة ذهبية رغوية تتشكل على سطح الإسبريسو، تدل على طزاجة القهوة وجودة التحضير.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="arabesque-pattern pattern-bottom"></div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">قهوتي</div>
+            <p class="footer-text">رحلة في عالم القهوة المختصة</p>
+            
+            <div class="footer-contact">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>alyazeede@gmail.com</span>
+                </div>
+            </div>
+            
+            <div class="footer-social">
+                <a href="https://instagram.com/alyazeedi.s" target="_blank" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            
+            <div class="footer-copy">
+                &copy; 2023 قهوتي - تصميم سلطان اليزيدي
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+    
     <script>
-        // Flavor of the day random generator
-        const flavorNames = [
-            "إثيوبية مشرقة", "كولومبية متوازنة", "برازيلية غنية", "يمنية عطرية", 
-            "كينية حمضية", "إندونيسية ترابية", "كوستاريكية منعشة", "غواتيمالية فاكهية"
-        ];
+        // Initialize flavor chart
+        const flavorChart = new Chart(
+            document.getElementById('flavor-chart'),
+            {
+                type: 'radar',
+                data: {
+                    labels: ['الحموضة', 'المرارة', 'الحلاوة', 'الجسم', 'التعقيد'],
+                    datasets: [{
+                        label: 'خصائص النكهة',
+                        data: [3, 3, 3, 3, 3],
+                        backgroundColor: 'rgba(166, 123, 91, 0.2)',
+                        borderColor: 'rgba(125, 90, 68, 1)',
+                        pointBackgroundColor: 'rgba(212, 167, 106, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(125, 90, 68, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 5,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        );
         
-        const flavorDescriptions = [
-            "قهوة فاتحة التحميص من إثيوبيا، تتميز بنكهات الحمضيات والتوت ونفحات زهرية.",
-            "قهوة متوسطة التحميص من كولومبيا، متوازنة مع نكهات الجوز والكراميل.",
-            "قهوة متوسطة-داكنة من البرازيل، تتميز بالشوكولاتة والمكسرات والجسم الغني.",
-            "قهوة فريدة من اليمن، فيها تعقيد كبير مع نكهات التوابل والفواكه المجففة.",
-            "قهوة فاتحة من كينيا، حموضة عالية مميزة ونكهات توت قوية وفواكه حمضية.",
-            "قهوة داكنة من إندونيسيا، تتميز بنكهات ترابية عميقة وأعشاب وتوابل.",
-            "قهوة متوسطة من كوستاريكا، نظيفة ومنعشة مع لمسات من الحمضيات والعسل.",
-            "قهوة متوسطة فاتحة من غواتيمالا، نكهات فاكهية مميزة وحلاوة جيدة."
-        ];
+        // Variables to store selections
+        let selectedCountry = null;
+        let selectedRoast = null;
+        let selectedBean = null;
+        let selectedPreparationMethod = null;
         
-        const flavorTags = [
-            ["حموضة عالية", "نكهات فاكهية", "تحميص فاتح"],
-            ["متوازنة", "نكهات الجوز", "تحميص متوسط"],
-            ["شوكولاتة", "جسم ثقيل", "تحميص متوسط-داكن"],
-            ["تعقيد عالي", "توابل", "فواكه مجففة"],
-            ["حموضة فاكهية", "توت", "نظافة النكهة"],
-            ["نكهات ترابية", "جسم ثقيل", "تحميص داكن"],
-            ["نظافة", "حلاوة", "حمضيات خفيفة"],
-            ["فاكهية", "حلاوة عالية", "تعقيد متوسط"]
-        ];
-        
-        // Function to set a random flavor of the day
-        function setRandomFlavor() {
-            const index = Math.floor(Math.random() * flavorNames.length);
-            document.getElementById('flavor-name').textContent = flavorNames[index];
-            document.querySelector('.flavor-of-day p:nth-of-type(1)').textContent = flavorDescriptions[index];
-            
-            // Clear and add new tags
-            const tagsContainer = document.querySelector('.flavor-of-day div');
-            tagsContainer.innerHTML = '';
-            
-            flavorTags[index].forEach(tag => {
-                const tagSpan = document.createElement('span');
-                tagSpan.className = 'flavor-tag';
-                tagSpan.textContent = tag;
-                tagsContainer.appendChild(tagSpan);
-            });
-        }
-        
-        // Initialize on load
-        document.addEventListener('DOMContentLoaded', function() {
-            setRandomFlavor();
-            setCurrentMonth();
-            updateSeasonalRecommendations();
-            updateFlavorRadar(); // Initialize radar chart
-        });
-        
-        // Seasonal coffee calendar
-        const coffeeHarvests = {
-            jan: ["كولومبيا (الجنوب)", "إثيوبيا", "كينيا", "تنزانيا"],
-            feb: ["كولومبيا (الجنوب)", "إثيوبيا", "كينيا", "تنزانيا"],
-            mar: ["كوستاريكا", "غواتيمالا", "المكسيك", "نيكاراغوا"],
-            apr: ["كوستاريكا", "غواتيمالا", "هندوراس", "المكسيك"],
-            may: ["بيرو", "هندوراس", "نيكاراغوا", "جامايكا"],
-            jun: ["بيرو", "البرازيل", "إندونيسيا", "أوغندا"],
-            jul: ["البرازيل", "إندونيسيا", "أوغندا", "رواندا"],
-            aug: ["البرازيل", "إندونيسيا", "أوغندا", "بابوا غينيا الجديدة"],
-            sep: ["البرازيل", "إثيوبيا (الجديد)", "بابوا غينيا الجديدة", "بوروندي"],
-            oct: ["كولومبيا (الشمال)", "إثيوبيا (الجديد)", "اليمن", "الهند"],
-            nov: ["كولومبيا (الشمال)", "الهند", "اليمن", "رواندا"],
-            dec: ["كولومبيا (الشمال)", "إثيوبيا", "كينيا (الجديد)", "تنزانيا (الجديد)"]
+        // Characteristics values
+        const characteristics = {
+            acidity: 3,
+            bitterness: 3,
+            sweetness: 3,
+            body: 3,
+            complexity: 3
         };
         
-        const monthsArabic = [
-            "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
-            "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
-        ];
+        // Preparation methods details
+        const preparationDetails = {
+            'espresso': {
+                title: 'تحضير الإسبريسو',
+                steps: [
+                    'اطحن القهوة بدرجة طحن ناعمة جدًا.',
+                    'ضع 18-20 جرام من القهوة في البورتافلتر.',
+                    'وزع القهوة بالتساوي واضغط عليها بضغط متساوٍ.',
+                    'ركب البورتافلتر في الماكينة واستخرج 25-30 مل من الإسبريسو في 25-30 ثانية.',
+                    'قدم فورًا للاستمتاع بالكريما والنكهة الكاملة.'
+                ]
+            },
+            'french-press': {
+                title: 'تحضير الفرنش برس',
+                steps: [
+                    'اطحن القهوة بدرجة طحن خشنة.',
+                    'سخن الماء لدرجة حرارة 93-96 درجة مئوية.',
+                    'ضع القهوة في الفرنش برس وأضف الماء الساخن.',
+                    'حرك برفق لضمان تبلل جميع حبيبات القهوة.',
+                    'ضع الغطاء بدون ضغط المكبس واترك القهوة تتخمر لمدة 4 دقائق.',
+                    'اضغط المكبس للأسفل ببطء وثبات.',
+                    'قدم القهوة فورًا.'
+                ]
+            },
+            'v60': {
+                title: 'تحضير V60',
+                steps: [
+                    'ضع فلتر الورق في V60 واشطفه بالماء الساخن.',
+                    'اطحن القهوة بدرجة طحن متوسطة-ناعمة.',
+                    'ضع القهوة في الفلتر وحفر حفرة صغيرة في المنتصف.',
+                    'سخن الماء لدرجة حرارة 92-96 درجة مئوية.',
+                    'صب كمية قليلة من الماء (ضعف وزن القهوة) للتهوية واترك 30-45 ثانية.',
+                    'أكمل صب الماء بشكل دائري من المركز للخارج على دفعات.',
+                    'دع القهوة تقطر تمامًا، يجب أن تستغرق العملية 2.5-3 دقائق.'
+                ]
+            },
+            'aeropress': {
+                title: 'تحضير الإيروبرس',
+                steps: [
+                    'اطحن القهوة بدرجة طحن متوسطة-ناعمة.',
+                    'ضع الفلتر في الغطاء واشطفه بالماء الساخن.',
+                    'جمع الإيروبرس وضعه على الكوب.',
+                    'أضف القهوة ثم الماء بدرجة حرارة 85-95 درجة مئوية.',
+                    'حرك المزيج لمدة 10 ثوانٍ.',
+                    'اترك لمدة 1-2 دقيقة للتخمير.',
+                    'ضع الغطاء واقلب الإيروبرس على الكوب.',
+                    'اضغط ببطء وثبات لمدة 20-30 ثانية.'
+                ]
+            },
+            'cold-brew': {
+                title: 'تحضير الكولد برو',
+                steps: [
+                    'اطحن القهوة بدرجة طحن خشنة جدًا.',
+                    'ضع القهوة في وعاء وأضف الماء البارد بنسبة 1:8 (قهوة:ماء).',
+                    'حرك جيدًا لضمان تبلل جميع حبيبات القهوة.',
+                    'غطِ الوعاء واتركه في الثلاجة لمدة 12-24 ساعة.',
+                    'صفِّ القهوة باستخدام فلتر ورقي أو قماشي.',
+                    'خفف التركيز حسب الرغبة بإضافة الماء أو الثلج.',
+                    'يمكن تخزين الكولد برو في الثلاجة لمدة تصل إلى أسبوعين.'
+                ]
+            }
+        };
         
-        const monthsShort = [
-            "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"
-        ];
-        
-        function setCurrentMonth() {
-            const now = new Date();
-            const currentMonthIndex = now.getMonth();
-            const currentMonthName = monthsArabic[currentMonthIndex];
-            const currentMonthId = monthsShort[currentMonthIndex];
-            
-            // Update UI
-            document.getElementById('current-month').textContent = currentMonthName;
-            
-            // Highlight current month
-            document.querySelectorAll('.month-highlight').forEach(month => {
-                month.classList.remove('active');
+        // Functions to handle user interaction
+        function selectCountry(element) {
+            // Remove selected class from all countries
+            document.querySelectorAll('.country-card').forEach(card => {
+                card.classList.remove('selected');
             });
-            document.getElementById(currentMonthId).classList.add('active');
             
-            // Add click listeners to months
-            document.querySelectorAll('.month-highlight').forEach(month => {
-                month.addEventListener('click', function() {
-                    document.querySelectorAll('.month-highlight').forEach(m => {
-                        m.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                    
-                    const monthId = this.id;
-                    const monthIndex = monthsShort.indexOf(monthId);
-                    document.getElementById('current-month').textContent = monthsArabic[monthIndex];
-                    
-                    updateSeasonalRecommendations(monthId);
+            // Add selected class to clicked country
+            element.classList.add('selected');
+            
+            // Store selected country
+            selectedCountry = element.dataset.country;
+            
+            // Update country in summary
+            document.getElementById('summary-country').textContent = element.querySelector('.country-name').textContent;
+            
+            // Update characteristics based on country
+            updateCharacteristicsBasedOnCountry(selectedCountry);
+            
+            // Show toast notification
+            showToast(`تم اختيار ${element.querySelector('.country-name').textContent}`);
+            
+            // Update progress bar
+            updateProgress(2);
+        }
+        
+        function selectRoast(element) {
+            // Remove selected class from all roasts
+            document.querySelectorAll('.roast-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked roast
+            element.classList.add('selected');
+            
+            // Store selected roast
+            selectedRoast = element.dataset.roast;
+            
+            // Update roast in summary
+            document.getElementById('summary-roast').textContent = element.querySelector('.roast-name').textContent;
+            
+            // Update characteristics based on roast
+            updateCharacteristicsBasedOnRoast(selectedRoast);
+            
+            // Show toast notification
+            showToast(`تم اختيار ${element.querySelector('.roast-name').textContent}`);
+            
+            // Update progress bar
+            updateProgress(3);
+        }
+        
+        function selectBean(element) {
+            // Remove selected class from all beans
+            document.querySelectorAll('.bean-type').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked bean
+            element.classList.add('selected');
+            
+            // Store selected bean
+            selectedBean = element.dataset.bean;
+            
+            // Update bean in summary
+            document.getElementById('summary-bean').textContent = element.querySelector('.bean-name').textContent;
+            
+            // Update characteristics based on bean
+            updateCharacteristicsBasedOnBean(selectedBean);
+            
+            // Show toast notification
+            showToast(`تم اختيار ${element.querySelector('.bean-name').textContent}`);
+            
+            // Update progress bar
+            updateProgress(4);
+        }
+        
+        function selectPreparationMethod(element) {
+            // Remove selected class from all methods
+            document.querySelectorAll('.preparation-method').forEach(method => {
+                method.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked method
+            element.classList.add('selected');
+            
+            // Store selected preparation method
+            selectedPreparationMethod = element.dataset.method;
+            
+            // Update method in summary
+            document.getElementById('summary-method').textContent = element.querySelector('.preparation-name').textContent;
+            
+            // Show preparation details
+            updatePreparationDetails(selectedPreparationMethod);
+            
+            // Show toast notification
+            showToast(`تم اختيار ${element.querySelector('.preparation-name').textContent}`);
+            
+            // Update progress bar
+            updateProgress(5);
+        }
+        
+        function updateCharacteristic(characteristic, value) {
+            // Update value in characteristics object
+            characteristics[characteristic] = parseInt(value);
+            
+            // Update value display
+            document.getElementById(`${characteristic}-value`).textContent = value;
+            
+            // Update chart
+            updateFlavorChart();
+            
+            // Update summary
+            document.getElementById(`summary-${characteristic}`).textContent = value;
+        }
+        
+        function updateFlavorChart() {
+            flavorChart.data.datasets[0].data = [
+                characteristics.acidity,
+                characteristics.bitterness,
+                characteristics.sweetness,
+                characteristics.body,
+                characteristics.complexity
+            ];
+            flavorChart.update();
+        }
+        
+        function calculateRatio() {
+            const ratio = parseInt(document.getElementById('ratio-select').value);
+            const coffeeWeight = parseInt(document.getElementById('coffee-weight').value);
+            const waterAmount = coffeeWeight * ratio;
+            
+            document.getElementById('water-amount').value = waterAmount;
+            document.getElementById('ratio-result').textContent = `لتحضير قهوة مثالية، استخدم ${coffeeWeight} جرام من القهوة مع ${waterAmount} مل من الماء`;
+            
+            // Update summary
+            document.getElementById('summary-ratio').textContent = `1:${ratio}`;
+            document.getElementById('summary-coffee-weight').textContent = coffeeWeight;
+            document.getElementById('summary-water-amount').textContent = waterAmount;
+        }
+        
+        function calculateWaterFromCoffee() {
+            const ratio = parseInt(document.getElementById('ratio-select').value);
+            const coffeeWeight = parseInt(document.getElementById('coffee-weight').value);
+            const waterAmount = coffeeWeight * ratio;
+            
+            document.getElementById('water-amount').value = waterAmount;
+            document.getElementById('ratio-result').textContent = `لتحضير قهوة مثالية، استخدم ${coffeeWeight} جرام من القهوة مع ${waterAmount} مل من الماء`;
+            
+            // Update summary
+            document.getElementById('summary-coffee-weight').textContent = coffeeWeight;
+            document.getElementById('summary-water-amount').textContent = waterAmount;
+        }
+        
+        function calculateCoffeeFromWater() {
+            const ratio = parseInt(document.getElementById('ratio-select').value);
+            const waterAmount = parseInt(document.getElementById('water-amount').value);
+            const coffeeWeight = Math.round(waterAmount / ratio);
+            
+            document.getElementById('coffee-weight').value = coffeeWeight;
+            document.getElementById('ratio-result').textContent = `لتحضير قهوة مثالية، استخدم ${coffeeWeight} جرام من القهوة مع ${waterAmount} مل من الماء`;
+            
+            // Update summary
+            document.getElementById('summary-coffee-weight').textContent = coffeeWeight;
+            document.getElementById('summary-water-amount').textContent = waterAmount;
+        }
+        
+        function updatePreparationDetails(method) {
+            const card = document.getElementById('preparation-card');
+            const title = document.getElementById('preparation-title');
+            const steps = document.getElementById('preparation-steps');
+            const desc = document.getElementById('preparation-desc');
+            
+            if (method && preparationDetails[method]) {
+                title.textContent = preparationDetails[method].title;
+                
+                // Clear previous steps
+                steps.innerHTML = '';
+                
+                // Add steps
+                const stepsList = document.createElement('ol');
+                stepsList.style.paddingRight = '1.5rem';
+                preparationDetails[method].steps.forEach(step => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = step;
+                    listItem.style.marginBottom = '0.5rem';
+                    stepsList.appendChild(listItem);
                 });
-            });
-        }
-        
-        function updateSeasonalRecommendations(monthId = null) {
-            // If no month specified, use current month
-            if (!monthId) {
-                const now = new Date();
-                monthId = monthsShort[now.getMonth()];
+                steps.appendChild(stepsList);
+                
+                // Show card and hide description
+                card.style.display = 'block';
+                desc.style.display = 'none';
+            } else {
+                // Hide card and show description
+                card.style.display = 'none';
+                desc.style.display = 'block';
             }
-            
-            // Get harvests for the month
-            const harvests = coffeeHarvests[monthId];
-            
-            // Update the list
-            const harvestList = document.getElementById('harvest-list');
-            harvestList.innerHTML = '';
-            
-            harvests.forEach(harvest => {
-                const li = document.createElement('li');
-                li.textContent = harvest;
-                harvestList.appendChild(li);
-            });
         }
         
-        // Navigation and step management
-        function nextStep(currentStep, nextStep) {
-            // Hide current section
-            document.getElementById(`${currentStep}-section`).classList.add('hidden');
-            
-            // Show next section
-            const nextSection = document.getElementById(`${nextStep}-section`);
-            nextSection.classList.remove('hidden');
-            
-            // Add animation class
-            nextSection.classList.add('fade-in');
-            
-            // Update timeline
-            document.querySelector(`.timeline-step[data-step="${currentStep}"]`).classList.add('completed');
-            document.querySelector(`.timeline-step[data-step="${currentStep}"]`).classList.remove('active');
-            document.querySelector(`.timeline-step[data-step="${nextStep}"]`).classList.add('active');
-            
-            // Scroll to top of the new section
-            nextSection.scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        function prevStep(currentStep, prevStep) {
-            // Hide current section
-            document.getElementById(`${currentStep}-section`).classList.add('hidden');
-            
-            // Show previous section
-            const prevSection = document.getElementById(`${prevStep}-section`);
-            prevSection.classList.remove('hidden');
-            
-            // Update timeline
-            document.querySelector(`.timeline-step[data-step="${currentStep}"]`).classList.remove('active');
-            document.querySelector(`.timeline-step[data-step="${prevStep}"]`).classList.add('active');
-            document.querySelector(`.timeline-step[data-step="${prevStep}"]`).classList.remove('completed');
-            
-            // Scroll to top of the new section
-            prevSection.scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        // Selection functions
-        function selectBean(element, beanType) {
-            // Remove selection from all beans
-            document.querySelectorAll('.bean-type').forEach(bean => {
-                bean.classList.remove('selected');
+        function updateProgress(step) {
+            // Remove active class from all steps
+            document.querySelectorAll('.step').forEach(stepElement => {
+                stepElement.classList.remove('active');
             });
             
-            // Add selection to clicked bean
-            element.classList.add('selected');
-            
-            // Update summary
-            document.getElementById('summary-bean').textContent = element.querySelector('h3').textContent;
-            
-            // Update flavor profile based on bean selection
-            updateFlavorProfile();
-        }
-        
-        function selectCountry(element, country) {
-            // Remove selection from all countries
-            document.querySelectorAll('.country-option').forEach(option => {
-                option.classList.remove('selected');
-                option.style.backgroundColor = '';
-            });
-            
-            // Add selection to clicked country
-            element.classList.add('selected');
-            element.style.backgroundColor = 'rgba(184, 126, 69, 0.1)';
-            
-            // Update summary
-            document.getElementById('summary-origin').textContent = element.querySelector('h4').textContent;
-            
-            // Update flavor profile based on country selection
-            updateFlavorProfile();
-        }
-        
-        function selectRoast(element, roastLevel) {
-            // Remove selection from all roast levels
-            document.querySelectorAll('.roast-level').forEach(level => {
-                level.classList.remove('selected');
-            });
-            
-            // Add selection to clicked roast level
-            element.classList.add('selected');
-            
-            // Update summary
-            document.getElementById('summary-roast').textContent = element.querySelector('span').textContent;
-            
-            // Update flavor profile based on roast selection
-            updateFlavorProfile();
-        }
-        
-        function selectAltitude(element, altitude) {
-            // Remove selection from all altitude options
-            document.querySelectorAll('.altitude-option').forEach(option => {
-                option.classList.remove('selected');
-                option.style.backgroundColor = '';
-            });
-            
-            // Add selection to clicked altitude
-            element.classList.add('selected');
-            element.style.backgroundColor = 'rgba(184, 126, 69, 0.1)';
-            
-            // Update flavor profile based on altitude selection
-            updateFlavorProfile();
-        }
-        
-        function selectProcess(element, process) {
-            // Remove selection from all process options
-            document.querySelectorAll('.process-option').forEach(option => {
-                option.classList.remove('selected');
-                option.style.backgroundColor = '';
-            });
-            
-            // Add selection to clicked process
-            element.classList.add('selected');
-            element.style.backgroundColor = 'rgba(184, 126, 69, 0.1)';
-            
-            // Update flavor profile based on process selection
-            updateFlavorProfile();
-        }
-        
-        function selectBrewMethod(element, method) {
-            // Remove selection from all brew methods
-            document.querySelectorAll('.brew-method').forEach(option => {
-                option.classList.remove('selected');
-            });
-            
-            // Add selection to clicked method
-            element.classList.add('selected');
-            
-            // Update summary
-            document.getElementById('summary-brew').textContent = element.querySelector('h3').textContent;
-            
-            // Update recommended ratio based on brew method
-            updateRecommendedRatio(method);
-        }
-        
-        function updateRecommendedRatio(method) {
-            const ratioSelect = document.getElementById('ratio-select');
-            
-            // Set recommended ratio based on brew method
-            switch(method) {
-                case 'espresso':
-                    ratioSelect.value = "14";
-                    break;
-                case 'french':
-                    ratioSelect.value = "15";
-                    break;
-                case 'aeropress':
-                    ratioSelect.value = "16";
-                    break;
-                case 'filter':
-                    ratioSelect.value = "17";
-                    break;
-                case 'cold':
-                    ratioSelect.value = "18";
-                    break;
-                default:
-                    ratioSelect.value = "16";
+            // Add active class to current step and all previous steps
+            for (let i = 1; i <= step; i++) {
+                const stepElement = document.querySelector(`.step[data-step="${i}"]`);
+                if (stepElement) {
+                    stepElement.classList.add('active');
+                }
             }
-            
-            // Update water calculation
-            updateRatioCalculation();
         }
         
-        // Ratio calculator functions
-        function updateRatioCalculation() {
-            const ratio = parseInt(document.getElementById('ratio-select').value);
-            const coffeeAmount = parseInt(document.getElementById('coffee-input').value);
-            const waterAmount = coffeeAmount * ratio;
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
             
-            document.getElementById('water-input').value = waterAmount;
-            document.getElementById('ratio-result').textContent = 
-                `${coffeeAmount} جرام قهوة : ${waterAmount} مل ماء (1:${ratio})`;
-            
-            // Update summary
-            document.getElementById('summary-ratio').textContent = 
-                `1:${ratio} (${coffeeAmount} جرام : ${waterAmount} مل)`;
+            // Hide toast after 3 seconds
+            setTimeout(() => {
+                toast.style.animation = 'slideOut 0.3s ease forwards';
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                    toast.style.animation = '';
+                }, 300);
+            }, 3000);
         }
         
-        function updateWaterFromCoffee() {
-            const ratio = parseInt(document.getElementById('ratio-select').value);
-            const coffeeAmount = parseInt(document.getElementById('coffee-input').value);
-            const waterAmount = coffeeAmount * ratio;
+        function shareWhatsApp() {
+            const country = document.getElementById('summary-country').textContent;
+            const roast = document.getElementById('summary-roast').textContent;
+            const bean = document.getElementById('summary-bean').textContent;
+            const method = document.getElementById('summary-method').textContent;
+            const ratio = document.getElementById('summary-ratio').textContent;
+            const coffeeWeight = document.getElementById('summary-coffee-weight').textContent;
+            const waterAmount = document.getElementById('summary-water-amount').textContent;
             
-            document.getElementById('water-input').value = waterAmount;
-            document.getElementById('ratio-result').textContent = 
-                `${coffeeAmount} جرام قهوة : ${waterAmount} مل ماء (1:${ratio})`;
+            const message = `*وصفة قهوتي المميزة* ☕\n\n` +
+                `*بلد المنشأ:* ${country}\n` +
+                `*درجة التحميص:* ${roast}\n` +
+                `*نوع الحبوب:* ${bean}\n\n` +
+                `*الخصائص الحسية:*\n` +
+                `• الحموضة: ${characteristics.acidity}/5\n` +
+                `• المرارة: ${characteristics.bitterness}/5\n` +
+                `• الحلاوة: ${characteristics.sweetness}/5\n` +
+                `• الجسم: ${characteristics.body}/5\n` +
+                `• التعقيد: ${characteristics.complexity}/5\n\n` +
+                `*طريقة التحضير:* ${method}\n` +
+                `*نسبة الريشو:* ${ratio}\n` +
+                `*كمية القهوة:* ${coffeeWeight} جرام\n` +
+                `*كمية الماء:* ${waterAmount} مل\n\n` +
+                `صمم وصفتك الخاصة على موقع قهوتي!`;
             
-            // Update summary
-            document.getElementById('summary-ratio').textContent = 
-                `1:${ratio} (${coffeeAmount} جرام : ${waterAmount} مل)`;
+            // Encode message for WhatsApp URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Open WhatsApp share link
+            window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
         }
         
-        function updateCoffeeFromWater() {
-            const ratio = parseInt(document.getElementById('ratio-select').value);
-            const waterAmount = parseInt(document.getElementById('water-input').value);
-            const coffeeAmount = Math.round(waterAmount / ratio);
-            
-            document.getElementById('coffee-input').value = coffeeAmount;
-            document.getElementById('ratio-result').textContent = 
-                `${coffeeAmount} جرام قهوة : ${waterAmount} مل ماء (1:${ratio})`;
-            
-            // Update summary
-            document.getElementById('summary-ratio').textContent = 
-                `1:${ratio} (${coffeeAmount} جرام : ${waterAmount} مل)`;
-        }
-        
-        // Flavor profile update functions
-        function updateFlavorProfile() {
-            // Get selected options
-            const selectedBean = document.querySelector('.bean-type.selected')?.querySelector('h3')?.textContent || "أرابيكا";
-            const selectedCountry = document.querySelector('.country-option.selected')?.querySelector('h4')?.textContent || "إثيوبيا";
-            const selectedRoast = document.querySelector('.roast-level.selected')?.querySelector('span')?.textContent || "متوسط فاتح";
-            
-            // Set flavor characteristics based on selections
+        function updateCharacteristicsBasedOnCountry(country) {
+            // Default values if no country is selected
             let acidity = 3;
             let bitterness = 3;
             let sweetness = 3;
             let body = 3;
             let complexity = 3;
             
-            // Adjust based on bean type
-            if (selectedBean.includes('أرابيكا')) {
-                acidity += 1;
-                bitterness -= 1;
-                complexity += 1;
-                body -= 1;
-            } else if (selectedBean.includes('روبوستا')) {
-                acidity -= 1;
-                bitterness += 1;
-                body += 1;
-                complexity -= 1;
-            } else if (selectedBean.includes('مختصة')) {
-                acidity += 1;
-                sweetness += 1;
-                complexity += 2;
+            // Adjust values based on country
+            switch(country) {
+                case 'ethiopia':
+                    acidity = 5;
+                    bitterness = 2;
+                    sweetness = 4;
+                    body = 2;
+                    complexity = 5;
+                    break;
+                case 'brazil':
+                    acidity = 2;
+                    bitterness = 3;
+                    sweetness = 4;
+                    body = 4;
+                    complexity = 3;
+                    break;
+                case 'colombia':
+                    acidity = 4;
+                    bitterness = 3;
+                    sweetness = 3;
+                    body = 3;
+                    complexity = 4;
+                    break;
+                case 'yemen':
+                    acidity = 3;
+                    bitterness = 3;
+                    sweetness = 4;
+                    body = 4;
+                    complexity = 5;
+                    break;
+                case 'indonesia':
+                    acidity = 2;
+                    bitterness = 4;
+                    sweetness = 2;
+                    body = 5;
+                    complexity = 3;
+                    break;
+                case 'costa-rica':
+                    acidity = 4;
+                    bitterness = 2;
+                    sweetness = 3;
+                    body = 3;
+                    complexity = 3;
+                    break;
+                case 'kenya':
+                    acidity = 5;
+                    bitterness = 2;
+                    sweetness = 3;
+                    body = 2;
+                    complexity = 4;
+                    break;
+                case 'guatemala':
+                    acidity = 4;
+                    bitterness = 2;
+                    sweetness = 4;
+                    body = 3;
+                    complexity = 4;
+                    break;
             }
             
-            // Adjust based on country
-            if (selectedCountry === 'إثيوبيا') {
-                acidity += 1;
-                complexity += 1;
-                sweetness += 1;
-                body -= 1;
-            } else if (selectedCountry === 'كولومبيا') {
-                // Balanced
-            } else if (selectedCountry === 'البرازيل') {
-                acidity -= 1;
-                sweetness += 1;
-                body += 1;
-            } else if (selectedCountry === 'اليمن') {
-                complexity += 1;
-                body += 1;
-            } else if (selectedCountry === 'إندونيسيا') {
-                acidity -= 1;
-                body += 2;
-                bitterness += 1;
-            } else if (selectedCountry === 'كينيا') {
-                acidity += 2;
-                complexity += 1;
-            }
-            
-            // Adjust based on roast level
-            if (selectedRoast === 'فاتح') {
-                acidity += 1;
-                bitterness -= 1;
-                sweetness += 1;
-            } else if (selectedRoast === 'متوسط فاتح') {
-                acidity += 0.5;
-            } else if (selectedRoast === 'متوسط') {
-                // Balanced
-            } else if (selectedRoast === 'متوسط داكن') {
-                acidity -= 0.5;
-                bitterness += 0.5;
-                body += 0.5;
-            } else if (selectedRoast === 'داكن') {
-                acidity -= 1;
-                bitterness += 1;
-                body += 1;
-                complexity -= 1;
-            }
-            
-            // Ensure values are within valid range
-            acidity = Math.max(1, Math.min(5, Math.round(acidity)));
-            bitterness = Math.max(1, Math.min(5, Math.round(bitterness)));
-            sweetness = Math.max(1, Math.min(5, Math.round(sweetness)));
-            body = Math.max(1, Math.min(5, Math.round(body)));
-            complexity = Math.max(1, Math.min(5, Math.round(complexity)));
-            
-            // Update sliders
+            // Update sliders and values
             document.getElementById('acidity-slider').value = acidity;
+            document.getElementById('acidity-value').textContent = acidity;
+            characteristics.acidity = acidity;
+            
             document.getElementById('bitterness-slider').value = bitterness;
+            document.getElementById('bitterness-value').textContent = bitterness;
+            characteristics.bitterness = bitterness;
+            
             document.getElementById('sweetness-slider').value = sweetness;
+            document.getElementById('sweetness-value').textContent = sweetness;
+            characteristics.sweetness = sweetness;
+            
             document.getElementById('body-slider').value = body;
+            document.getElementById('body-value').textContent = body;
+            characteristics.body = body;
+            
             document.getElementById('complexity-slider').value = complexity;
-            
-            // Update slider value displays
-            document.getElementById('acidity-value').textContent = acidity;
-            document.getElementById('bitterness-value').textContent = bitterness;
-            document.getElementById('sweetness-value').textContent = sweetness;
-            document.getElementById('body-value').textContent = body;
             document.getElementById('complexity-value').textContent = complexity;
+            characteristics.complexity = complexity;
             
-            // Update radar chart
-            updateFlavorRadar();
+            // Update summary
+            document.getElementById('summary-acidity').textContent = acidity;
+            document.getElementById('summary-bitterness').textContent = bitterness;
+            document.getElementById('summary-sweetness').textContent = sweetness;
+            document.getElementById('summary-body').textContent = body;
+            document.getElementById('summary-complexity').textContent = complexity;
             
-            // Update flavor description
-            updateFlavorDescription(acidity, bitterness, sweetness, body, complexity, selectedCountry, selectedRoast);
+            // Update chart
+            updateFlavorChart();
         }
         
-        function updateFlavorRadar() {
-            // Get values from sliders
-            const acidity = parseInt(document.getElementById('acidity-slider').value);
-            const bitterness = parseInt(document.getElementById('bitterness-slider').value);
-            const sweetness = parseInt(document.getElementById('sweetness-slider').value);
-            const body = parseInt(document.getElementById('body-slider').value);
-            const complexity = parseInt(document.getElementById('complexity-slider').value);
+        function updateCharacteristicsBasedOnRoast(roast) {
+            // Don't override if no country selected yet
+            if (!selectedCountry) return;
             
-            // Update value displays
+            // Get current values
+            let acidity = characteristics.acidity;
+            let bitterness = characteristics.bitterness;
+            let sweetness = characteristics.sweetness;
+            let body = characteristics.body;
+            
+            // Adjust based on roast
+            switch(roast) {
+                case 'light':
+                    // Increase acidity, decrease bitterness
+                    acidity = Math.min(5, acidity + 1);
+                    bitterness = Math.max(1, bitterness - 1);
+                    body = Math.max(1, body - 1);
+                    break;
+                case 'medium':
+                    // Balance
+                    // No changes, keep country profile
+                    break;
+                case 'dark':
+                    // Decrease acidity, increase bitterness and body
+                    acidity = Math.max(1, acidity - 1);
+                    bitterness = Math.min(5, bitterness + 1);
+                    body = Math.min(5, body + 1);
+                    break;
+            }
+            
+            // Update sliders and values
+            document.getElementById('acidity-slider').value = acidity;
             document.getElementById('acidity-value').textContent = acidity;
+            characteristics.acidity = acidity;
+            
+            document.getElementById('bitterness-slider').value = bitterness;
             document.getElementById('bitterness-value').textContent = bitterness;
-            document.getElementById('sweetness-value').textContent = sweetness;
+            characteristics.bitterness = bitterness;
+            
+            document.getElementById('body-slider').value = body;
             document.getElementById('body-value').textContent = body;
+            characteristics.body = body;
+            
+            // Update summary
+            document.getElementById('summary-acidity').textContent = acidity;
+            document.getElementById('summary-bitterness').textContent = bitterness;
+            document.getElementById('summary-body').textContent = body;
+            
+            // Update chart
+            updateFlavorChart();
+        }
+        
+        function updateCharacteristicsBasedOnBean(bean) {
+            // Don't override if no country or roast selected yet
+            if (!selectedCountry || !selectedRoast) return;
+            
+            // Get current values
+            let acidity = characteristics.acidity;
+            let bitterness = characteristics.bitterness;
+            let body = characteristics.body;
+            let complexity = characteristics.complexity;
+            
+            // Adjust based on bean type
+            switch(bean) {
+                case 'arabica':
+                    // Higher acidity, more complexity
+                    acidity = Math.min(5, acidity + 1);
+                    bitterness = Math.max(1, bitterness - 1);
+                    complexity = Math.min(5, complexity + 1);
+                    break;
+                case 'robusta':
+                    // Higher bitterness, stronger body
+                    acidity = Math.max(1, acidity - 1);
+                    bitterness = Math.min(5, bitterness + 1);
+                    body = Math.min(5, body + 1);
+                    complexity = Math.max(1, complexity - 1);
+                    break;
+                case 'liberica':
+                    // More body, unique complexity
+                    body = Math.min(5, body + 1);
+                    complexity = Math.min(5, complexity + 1);
+                    break;
+            }
+            
+            // Update sliders and values
+            document.getElementById('acidity-slider').value = acidity;
+            document.getElementById('acidity-value').textContent = acidity;
+            characteristics.acidity = acidity;
+            
+            document.getElementById('bitterness-slider').value = bitterness;
+            document.getElementById('bitterness-value').textContent = bitterness;
+            characteristics.bitterness = bitterness;
+            
+            document.getElementById('body-slider').value = body;
+            document.getElementById('body-value').textContent = body;
+            characteristics.body = body;
+            
+            document.getElementById('complexity-slider').value = complexity;
             document.getElementById('complexity-value').textContent = complexity;
+            characteristics.complexity = complexity;
             
-            // Calculate radar points (convert 1-5 scale to coordinates)
-            const scale = 30; // Pixels per point
-            const centerX = 200;
-            const centerY = 200;
+            // Update summary
+            document.getElementById('summary-acidity').textContent = acidity;
+            document.getElementById('summary-bitterness').textContent = bitterness;
+            document.getElementById('summary-body').textContent = body;
+            document.getElementById('summary-complexity').textContent = complexity;
             
-            const points = [
-                // Acidity (top)
-                `${centerX},${centerY - (acidity * scale)}`,
-                // Bitterness (right)
-                `${centerX + (bitterness * scale)},${centerY}`,
-                // Sweetness (bottom)
-                `${centerX},${centerY + (sweetness * scale)}`,
-                // Body (left)
-                `${centerX - (body * scale)},${centerY}`,
-                // Complexity (top-right)
-                `${centerX + (complexity * scale * 0.7)},${centerY - (complexity * scale * 0.7)}`
-            ];
-            
-            // Update radar polygon
-            document.getElementById('flavor-radar').setAttribute('points', points.join(' '));
-            
-            // Update radar points
-            const pointElements = document.querySelectorAll('#flavor-radar + circle');
-            const pointCoords = points.map(point => point.split(','));
-            
-            pointElements.forEach((circle, index) => {
-                circle.setAttribute('cx', pointCoords[index][0]);
-                circle.setAttribute('cy', pointCoords[index][1]);
-            });
-            
-            // Update flavor description
-            const selectedCountry = document.querySelector('.country-option.selected')?.querySelector('h4')?.textContent || "إثيوبيا";
-            const selectedRoast = document.querySelector('.roast-level.selected')?.querySelector('span')?.textContent || "متوسط فاتح";
-            
-            updateFlavorDescription(acidity, bitterness, sweetness, body, complexity, selectedCountry, selectedRoast);
+            // Update chart
+            updateFlavorChart();
         }
         
-        function updateFlavorDescription(acidity, bitterness, sweetness, body, complexity, country, roast) {
-            let description = '';
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize progress bar
+            updateProgress(1);
             
-            // Style description based on characteristics
-            if (acidity >= 4) {
-                description += 'قهوة حيوية تتميز بحموضة واضحة ';
-            } else if (acidity <= 2) {
-                description += 'قهوة هادئة ذات حموضة منخفضة ';
-            } else {
-                description += 'قهوة متوازنة مع حموضة معتدلة ';
-            }
+            // Initialize ratio calculator
+            calculateRatio();
             
-            if (sweetness >= 4) {
-                description += 'وحلاوة طبيعية بارزة. ';
-            } else if (sweetness <= 2) {
-                description += 'وحلاوة خفيفة. ';
-            } else {
-                description += 'وحلاوة متوازنة. ';
-            }
+            // Update chart on load
+            updateFlavorChart();
             
-            // Add flavor notes based on country and roast
-            if (country === 'إثيوبيا') {
-                if (roast === 'فاتح' || roast === 'متوسط فاتح') {
-                    description += 'تحتوي على نكهات فاكهية متعددة الطبقات مثل التوت الأحمر والحمضيات، مع لمسات من النكهات الزهرية. ';
-                } else {
-                    description += 'تحتوي على نكهات الفواكه المجففة والتوت الأزرق، مع لمسات خفيفة من البهارات. ';
-                }
-            } else if (country === 'كولومبيا') {
-                description += 'تتميز بنكهات متوازنة من الجوز والكراميل، مع لمسة من الفواكه. ';
-            } else if (country === 'البرازيل') {
-                description += 'تقدم نكهات الشوكولاتة الداكنة والمكسرات، مع حلاوة تشبه قصب السكر. ';
-            } else if (country === 'اليمن') {
-                description += 'تمتاز بنكهات معقدة من التمر والتوابل والفواكه المجففة، مع عمق فريد. ';
-            } else if (country === 'إندونيسيا') {
-                description += 'تظهر نكهات ترابية عميقة مع لمسات من الأعشاب والتوابل والخشب. ';
-            } else if (country === 'كينيا') {
-                description += 'تبرز فيها نكهات التوت الأسود والعنب البري مع حموضة حيوية وفاكهية. ';
-            }
-            
-            // Add body and complexity descriptions
-            if (body >= 4) {
-                description += 'الجسم ثقيل وممتلئ ';
-            } else if (body <= 2) {
-                description += 'الجسم خفيف إلى متوسط ';
-            } else {
-                description += 'الجسم متوسط ';
-            }
-            
-            if (complexity >= 4) {
-                description += 'مع تعقيد نكهات عالي.';
-            } else if (complexity <= 2) {
-                description += 'مع نكهة مباشرة وبسيطة.';
-            } else {
-                description += 'مع تعقيد نكهات متوازن.';
-            }
-            
-            // Update flavor description
-            document.getElementById('flavor-description').textContent = description;
-            
-            // Update summary profile
-            const summaryProfile = `حموضة ${getTextLevel(acidity)}، مرارة ${getTextLevel(bitterness)}، حلاوة ${getTextLevel(sweetness)}، جسم ${getTextLevel(body)}، تعقيد ${getTextLevel(complexity)}.`;
-            document.getElementById('summary-profile').textContent = summaryProfile;
-        }
-        
-        function getTextLevel(value) {
-            if (value >= 4) return 'عالية';
-            if (value == 3) return 'متوسطة';
-            return 'منخفضة';
-        }
-        
-        // WhatsApp sharing
-        function shareOnWhatsapp() {
-            // Get summary content
-            const bean = document.getElementById('summary-bean').textContent;
-            const origin = document.getElementById('summary-origin').textContent;
-            const roast = document.getElementById('summary-roast').textContent;
-            const brew = document.getElementById('summary-brew').textContent;
-            const ratio = document.getElementById('summary-ratio').textContent;
-            const profile = document.getElementById('summary-profile').textContent;
-            
-            // Format message for WhatsApp
-            const message = 
-                `*وصفة قهوتي المميزة* ☕\n\n` +
-                `*نوع الحبوب:* ${bean}\n` +
-                `*بلد المنشأ:* ${origin}\n` +
-                `*درجة التحميص:* ${roast}\n` +
-                `*طريقة التحضير:* ${brew}\n` +
-                `*النسبة:* ${ratio}\n\n` +
-                `*خصائص النكهة:*\n${profile}\n\n` +
-                `شاركني رأيك إذا جربت هذه الوصفة! 🌟`;
-            
-            // Encode for URL
-            const encodedMessage = encodeURIComponent(message);
-            
-            // Open WhatsApp link
-            window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
-        }
-        
-        // Apply flavor of the day
-        document.getElementById('apply-flavor').addEventListener('click', function() {
-            const flavorName = document.getElementById('flavor-name').textContent;
-            
-            // Apply selections based on flavor name
-            if (flavorName.includes('إثيوبية')) {
-                // Select Ethiopia
-                const ethiopiaOption = document.querySelector('.country-option[onclick*="ethiopia"]');
-                if (ethiopiaOption) selectCountry(ethiopiaOption, 'ethiopia');
-                
-                // Select light roast
-                const lightRoast = document.querySelector('.roast-level[onclick*="light"]');
-                if (lightRoast) selectRoast(lightRoast, 'light');
-                
-                // Select Arabica
-                const arabicaBean = document.querySelector('.bean-type[onclick*="arabica"]');
-                if (arabicaBean) selectBean(arabicaBean, 'arabica');
-                
-                // Select high altitude
-                const highAltitude = document.querySelector('.altitude-option[onclick*="high"]');
-                if (highAltitude) selectAltitude(highAltitude, 'high');
-                
-                // Select washed process
-                const washedProcess = document.querySelector('.process-option[onclick*="washed"]');
-                if (washedProcess) selectProcess(washedProcess, 'washed');
-                
-                // Select filter brewing
-                const filterBrew = document.querySelector('.brew-method[onclick*="filter"]');
-                if (filterBrew) selectBrewMethod(filterBrew, 'filter');
-            } else if (flavorName.includes('كولومبية')) {
-                // Similar selections for Colombian coffee
-                const colombiaOption = document.querySelector('.country-option[onclick*="colombia"]');
-                if (colombiaOption) selectCountry(colombiaOption, 'colombia');
-                
-                const mediumRoast = document.querySelector('.roast-level[onclick*="medium"]');
-                if (mediumRoast) selectRoast(mediumRoast, 'medium');
-                
-                // And so on...
-            }
-            // Add similar conditions for other flavor types
-            
-            // Navigate to beans section
-            document.querySelector('.timeline-step[data-step="beans"]').click();
-            if (document.getElementById('beans-section').classList.contains('hidden')) {
-                document.getElementById('beans-section').classList.remove('hidden');
-                document.querySelectorAll('section').forEach(section => {
-                    if (section.id !== 'beans-section') section.classList.add('hidden');
+            // Handle click on progress bar steps
+            document.querySelectorAll('.step').forEach(step => {
+                step.addEventListener('click', function() {
+                    const stepNumber = parseInt(this.dataset.step);
+                    
+                    // Get corresponding section
+                    let targetId;
+                    switch(stepNumber) {
+                        case 1:
+                            targetId = 'country-selection';
+                            break;
+                        case 2:
+                            targetId = 'roast-selection';
+                            break;
+                        case 3:
+                            targetId = 'bean-selection';
+                            break;
+                        case 4:
+                            targetId = 'characteristics-selection';
+                            break;
+                        case 5:
+                            targetId = 'prepare-coffee';
+                            break;
+                        case 6:
+                            targetId = 'share-section';
+                            break;
+                    }
+                    
+                    if (targetId) {
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
                 });
-            }
-            
-            // Update timeline
-            document.querySelectorAll('.timeline-step').forEach(step => {
-                step.classList.remove('active', 'completed');
             });
-            document.querySelector('.timeline-step[data-step="beans"]').classList.add('active');
             
-            // Scroll to beans section
-            document.getElementById('beans-section').scrollIntoView({ behavior: 'smooth' });
-        });
-        
-        // Setup timeline navigation
-        document.querySelectorAll('.timeline-step').forEach(step => {
-            step.addEventListener('click', function() {
-                const targetStep = this.getAttribute('data-step');
+            // Handle scroll for progress bar
+            window.addEventListener('scroll', function() {
+                const sections = [
+                    { id: 'country-selection', step: 1 },
+                    { id: 'roast-selection', step: 2 },
+                    { id: 'bean-selection', step: 3 },
+                    { id: 'characteristics-selection', step: 4 },
+                    { id: 'prepare-coffee', step: 5 },
+                    { id: 'share-section', step: 6 }
+                ];
                 
-                // Only allow navigation to completed steps or the active step
-                if (this.classList.contains('completed') || this.classList.contains('active')) {
-                    // Hide all sections
-                    document.querySelectorAll('section[id$="-section"]').forEach(section => {
-                        section.classList.add('hidden');
-                    });
-                    
-                    // Show target section
-                    document.getElementById(`${targetStep}-section`).classList.remove('hidden');
-                    
-                    // Update active step
-                    document.querySelectorAll('.timeline-step').forEach(s => {
-                        s.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                    
-                    // Scroll to the section
-                    document.getElementById(`${targetStep}-section`).scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-        
-        // Add event listeners for sliders to update values
-        document.querySelectorAll('input[type="range"]').forEach(slider => {
-            slider.addEventListener('input', function() {
-                const valueDisplay = document.getElementById(`${this.id.replace('-slider', '')}-value`);
-                if (valueDisplay) {
-                    valueDisplay.textContent = this.value;
+                const scrollPosition = window.scrollY + 200; // Offset for better tracking
+                
+                for (let i = 0; i < sections.length; i++) {
+                    const section = document.getElementById(sections[i].id);
+                    if (section) {
+                        const sectionTop = section.offsetTop;
+                        const sectionBottom = sectionTop + section.offsetHeight;
+                        
+                        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                            updateProgress(sections[i].step);
+                            break;
+                        }
+                    }
                 }
             });
         });
